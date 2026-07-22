@@ -10,6 +10,9 @@
 
 ## 🚨 Reglas de Memoria & Aprendizajes Críticos
 
+### 0. NUNCA Inventar Datos o Ejemplos Ficticios
+- **REGLA DE ORO:** Jamás inventar feedback falso, métricas ficticias ni datos simulados. Toda la documentación, tableros y análisis deben reflejar **100% hechos reales** proporcionados por el usuario.
+
 ### 1. Única Fuente de Verdad (`src/`)
 - Toda la lógica, vistas y estilos viven exclusivamente dentro del directorio `src/`.
 - **NUNCA** volver a recrear archivos HTML/CSS estáticos (`index.html`, `style.css`, `app.js`) en la raíz del repositorio, ya que compiten con el servidor Vite/Nitro de Lovable.
