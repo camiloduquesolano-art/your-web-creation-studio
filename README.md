@@ -1,29 +1,17 @@
-# Welcome to your Lovable project
+# Shroomed — Landing Page (Waitlist & AI Pharmaco-Assistant)
 
-This project was built with [Lovable](https://lovable.dev).
+Página web cinemática y moderna para **Shroomed**, la plataforma con asistente de IA y bóveda de conocimiento médica/fármaco personalizada.
 
-## Build with Lovable
+## 🚀 Archivos Principales
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+- **`index.html`** — Versión principal en Español.
+- **`index-en.html`** — Versión 2 en Inglés.
+- **`style.css`** — Sistema de diseño completo (Groovy Retro, Bagel Fat One / Poppins, sombras retro, animaciones de scroll y responsive layout).
+- **`app.js`** — Animaciones por scroll, efecto parallax en stickers, guardado local en `localStorage` y descarga de lista de espera en formato CSV.
+- **`Diseño desde WhatsApp.md`** — Guía de marca y tokens de diseño oficial.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+## 📱 Características
+- **Pila Retro 60s/70s Groovy:** Paleta de color cálida (`#FDE9DE`, `#2E314A`, `#EAAF3D`, `#F05257`, `#94CAED`, `#89C97F`).
+- **Los 4 Pilares del Agente:** Perfilamiento dinámico, catálogo de sustancias, intenciones y bitácora interactiva.
+- **Mockup Interactivo:** Simulación visual del chat con el Agente Shroomed en tiempo real.
+- **Waitlist & Admin:** Formulario con captura local y modal para administradores para descargar los registros en CSV.
