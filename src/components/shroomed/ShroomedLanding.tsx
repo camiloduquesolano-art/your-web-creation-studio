@@ -50,7 +50,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
 
       {/* Header Fijo */}
       <header className="sticky top-0 z-50 border-b-[3px] border-shroom-navy bg-shroom-cream/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1350px] items-center justify-between gap-6 px-6 py-4">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
           <a href="#hero" className="flex items-center gap-2 font-display text-[1.8rem] tracking-wider">
             <span className="text-3xl">🍄</span>
             <span>SHROOMED</span>
