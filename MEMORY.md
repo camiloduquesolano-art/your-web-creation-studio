@@ -13,7 +13,7 @@
 ### 0. NUNCA Inventar Datos o Ejemplos Ficticios & SIEMPRE Fechar Todo
 - **REGLA DE ORO:** Jamás inventar feedback falso, métricas ficticias ni datos simulados. Toda la documentación, tableros y análisis deben reflejar **100% hechos reales** proporcionados por el usuario.
 - **FECHADO OBLIGATORIO:** Todas las notas, tablas, tableros Kanban, roadmaps e ingestas de feedback en Obsidian deben llevar la fecha exacta (`date: YYYY-MM-DD`, `fecha_inicio`, `fecha_recepcion`).
-- **CENTRO DE COMANDO PERSONAL (STANDALONE):** App web independiente en `/Users/camiloduquesolano/Documents/Personal-Command-Center` (Puerto `5051`) para seguimiento de ejecución de Shroomed, testeo individual e hitos de aprendizajes consolidados.
+- **CENTRO DE COMANDO PERSONAL (STANDALONE AUTO-SYNC):** App web independiente en `/Users/camiloduquesolano/Documents/Personal-Command-Center` (Puerto `5055`). Lee automáticamente los archivos `.md` de `/Users/camiloduquesolano/Documents/Obsidian Vault/` via `server.js` (`/api/vault-data`). El usuario NO necesita escribir en la web; toda la ingesta ocurre en Obsidian.
 
 ### 1. Única Fuente de Verdad (`src/`)
 - Toda la lógica, vistas y estilos viven exclusivamente dentro del directorio `src/`.
