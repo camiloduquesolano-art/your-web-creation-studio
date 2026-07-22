@@ -28,3 +28,9 @@
 - `.reveal-up` elements must default to `opacity: 1` in CSS with React `useEffect` `IntersectionObserver` attached for scroll animation.
 - Never place `overflow-x: hidden` on root containers, as it breaks `position: sticky` on headers.
 
+### 5. Official Second Brain (Obsidian Vault) Sync Protocol
+- **Obsidian Vault Directory:** `/Users/camiloduquesolano/Documents/Obsidian Vault`
+- **Sync Trigger:** At the end of every major technical milestone, complex refactor, or troubleshooting session, automatically summarize key learnings and generate an Obsidian-formatted Markdown note.
+- **YAML Frontmatter Standard:** Always include `title`, `date`, `tags`, `type`, `status`, and `source: Antigravity AI`.
+- **Execution:** Copy notes to the user's Obsidian Vault path using `run_command` with `BypassSandbox: true`.
+
