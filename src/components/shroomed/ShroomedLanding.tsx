@@ -130,23 +130,23 @@ export function ShroomedLanding({ dict, lang }: Props) {
       <section className="hero-section" id="hero">
         <div className="container hero-container">
           
-          <div className="badge-pill hero-badge">
+          <div className="badge-pill hero-badge reveal-fade">
             <span className="badge-dot"></span>
             <span className="badge-text">{dict.hero.badge}</span>
           </div>
 
-          <h1 className="hero-title">
+          <h1 className="hero-title reveal-up">
             <span className="title-line-1">{dict.hero.titleTop}</span>
             <span className="title-line-2 highlight-text">{dict.hero.titleBottom}</span>
           </h1>
 
-          <p className="hero-subtitle">
+          <p className="hero-subtitle reveal-up delay-1">
             <strong>{dict.hero.subtitleLead}</strong>
             {dict.hero.subtitle}
           </p>
 
           {/* Waitlist Card Principal */}
-          <div className="waitlist-card" id="waitlist">
+          <div className="waitlist-card reveal-up delay-2" id="waitlist">
             <div className="waitlist-card-header">
               <span className="sparkle-icon">✨</span>
               <span>{dict.hero.waitlistHeader}</span>
@@ -210,7 +210,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
       <section className="pilares-section" id="pilares">
         <div className="container">
           
-          <div className="section-header text-center">
+          <div className="section-header text-center reveal-up">
             <span className="section-tag">{dict.pillars.tag}</span>
             <h2 className="section-title">{dict.pillars.title}</h2>
             <p className="section-description">{dict.pillars.subtitle}</p>
@@ -218,7 +218,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
 
           <div className="pilares-grid">
             {/* Pilar 1 */}
-            <div className="pilar-card">
+            <div className="pilar-card reveal-up">
               <h3>{dict.pillars.p1.num}. {dict.pillars.p1.title}</h3>
               <p className="pilar-subtitle">Conocimiento profundo o básico</p>
               <p>{dict.pillars.p1.desc}</p>
@@ -226,7 +226,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
             </div>
 
             {/* Pilar 2 */}
-            <div className="pilar-card">
+            <div className="pilar-card reveal-up delay-1">
               <h3>{dict.pillars.p2.num}. {dict.pillars.p2.title}</h3>
               <p className="pilar-subtitle">Catálogo de opciones adecuadas</p>
               <p>{dict.pillars.p2.desc}</p>
@@ -234,7 +234,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
             </div>
 
             {/* Pilar 3 */}
-            <div className="pilar-card">
+            <div className="pilar-card reveal-up delay-2">
               <h3>{dict.pillars.p3.num}. {dict.pillars.p3.title}</h3>
               <p className="pilar-subtitle">Profundización de objetivos</p>
               <p>{dict.pillars.p3.desc}</p>
@@ -242,7 +242,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
             </div>
 
             {/* Pilar 4 */}
-            <div className="pilar-card">
+            <div className="pilar-card reveal-up delay-3">
               <h3>{dict.pillars.p4.num}. {dict.pillars.p4.title}</h3>
               <p className="pilar-subtitle">Tu diario interactivo</p>
               <p>{dict.pillars.p4.desc}</p>
@@ -276,7 +276,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
             </div>
 
             {/* Visual Mockup Interactivo del Agente */}
-            <div className="boveda-visual">
+            <div className="boveda-visual reveal-up delay-1">
               <div className="boveda-card-frame">
                 <div className="boveda-header-bar">
                   <div className="bar-dots">
@@ -346,7 +346,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
           
           <div className="ciencia-cards-grid">
             {dict.science.cards.map((c, i) => (
-              <div key={i} className="ciencia-card">
+              <div key={i} className="ciencia-card reveal-up">
                 <div className="c-card-icon">{c.icon}</div>
                 <h3>{c.title}</h3>
                 <p>{c.desc}</p>
@@ -361,6 +361,19 @@ export function ShroomedLanding({ dict, lang }: Props) {
       <section className="cta-final-section">
         <div className="container">
           
+          <div className="cta-box text-center reveal-up">
+            
+            <div className="cta-illustration float-anim">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="38" fill="#EAAF3D" stroke="#2E314A" strokeWidth="4"/>
+                <path d="M40 14C23.4 14 10 26.8 10 42.5H70C70 26.8 56.6 14 40 14Z" fill="#F05257" stroke="#2E314A" strokeWidth="3"/>
+                <circle cx="27" cy="27" r="4.5" fill="#FDE9DE"/>
+                <circle cx="53" cy="29" r="4.5" fill="#FDE9DE"/>
+                <circle cx="40" cy="35" r="4" fill="#FDE9DE"/>
+                <path d="M33 42.5V60C33 63.9 36.1 67 40 67C43.9 67 47 63.9 47 60V42.5" fill="#FDE9DE" stroke="#2E314A" strokeWidth="3"/>
+              </svg>
+            </div>
+
             <h2 className="cta-title">{dict.cta.title}</h2>
             <p className="cta-subtitle">{dict.cta.subtitle}</p>
 
@@ -381,16 +394,16 @@ export function ShroomedLanding({ dict, lang }: Props) {
 
             <p className="disclaimer-text">{dict.cta.disclaimer}</p>
           </div>
+
         </div>
       </section>
 
       {/* Footer Retro */}
       <footer className="site-footer">
         <div className="container footer-container">
+          
           <div className="footer-left">
-            <a href="#hero" className="footer-logo">
-              SHROOMED
-            </a>
+            <a href="#hero" className="footer-logo">SHROOMED</a>
             <p className="footer-tagline">{dict.footer.tagline}</p>
             <span className="brandbook-label">— BRANDBOOK 2026</span>
           </div>
@@ -398,6 +411,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
           <div className="footer-right">
             <p className="copyright">{dict.footer.rights}</p>
           </div>
+
         </div>
       </footer>
 
