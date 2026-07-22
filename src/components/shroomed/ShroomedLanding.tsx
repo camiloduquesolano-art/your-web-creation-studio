@@ -50,12 +50,12 @@ export function ShroomedLanding({ dict, lang }: Props) {
 
       {/* Header Fijo */}
       <header className="sticky top-0 z-50 border-b-[3px] border-shroom-navy bg-shroom-cream/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3.5">
-          <a href="#hero" className="flex items-center gap-2 font-display text-2xl tracking-wide">
+        <div className="mx-auto flex max-w-[1350px] items-center justify-between gap-6 px-6 py-4">
+          <a href="#hero" className="flex items-center gap-2 font-display text-[1.8rem] tracking-wider">
             <span className="text-3xl">🍄</span>
             <span>SHROOMED</span>
           </a>
-          <nav className="hidden items-center gap-8 font-heading text-sm font-bold md:flex">
+          <nav className="hidden items-center gap-8 font-heading text-[1rem] font-semibold md:flex">
             <a href="#pilares" className="transition-colors hover:text-shroom-coral">
               {dict.nav.assistant}
             </a>
@@ -69,13 +69,13 @@ export function ShroomedLanding({ dict, lang }: Props) {
           <div className="flex items-center gap-3">
             <Link
               to={otherLang === "en" ? "/en" : "/"}
-              className="btn-retro-lang cursor-pointer px-4 py-1.5 font-heading text-xs font-bold uppercase"
+              className="btn-retro-lang cursor-pointer px-4 py-2 font-heading text-xs font-bold uppercase"
             >
               {otherLabel}
             </Link>
             <a
               href="#waitlist"
-              className="btn-retro-yellow hidden cursor-pointer px-5 py-2 font-heading text-xs font-bold uppercase sm:inline-block"
+              className="btn-retro-yellow hidden cursor-pointer px-5 py-2.5 font-heading text-sm font-bold uppercase sm:inline-block"
             >
               {dict.nav.join}
             </a>
