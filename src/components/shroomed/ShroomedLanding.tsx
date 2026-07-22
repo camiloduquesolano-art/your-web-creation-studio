@@ -129,7 +129,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
       {/* Hero Section Cinemática */}
       <section className="hero-section" id="hero">
         <div className="container hero-container">
-          
+
           <div className="badge-pill hero-badge reveal-fade">
             <span className="badge-dot"></span>
             <span className="badge-text">{dict.hero.badge}</span>
@@ -151,7 +151,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
               <span className="sparkle-icon">✨</span>
               <span>{dict.hero.waitlistHeader}</span>
             </div>
-            
+
             <form onSubmit={handleHeroSubmit} className="waitlist-form">
               <div className="form-row">
                 <div className="input-wrapper">
@@ -163,7 +163,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
                     className="custom-input"
                   />
                 </div>
-                
+
                 <div className="select-wrapper">
                   <select name="goal" className="custom-select" required defaultValue="">
                     <option value="" disabled>{dict.hero.goalPlaceholder}</option>
@@ -190,7 +190,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
                 <div className="avatar" style={{ background: "#017CA2" }}>✨</div>
               </div>
               <span className="proof-text">
-                <strong>{count}</strong> {dict.hero.socialProof}
+                <strong>{count}</strong> {dict.hero.social}
               </span>
             </div>
           </div>
@@ -209,45 +209,22 @@ export function ShroomedLanding({ dict, lang }: Props) {
       {/* Sección: Los 4 Pilares del Agente Shroomed */}
       <section className="pilares-section" id="pilares">
         <div className="container">
-          
+
           <div className="section-header text-center reveal-up">
             <span className="section-tag">{dict.pillars.tag}</span>
             <h2 className="section-title">{dict.pillars.title}</h2>
-            <p className="section-description">{dict.pillars.subtitle}</p>
+            <p className="section-description">{dict.pillars.description}</p>
           </div>
 
           <div className="pilares-grid">
-            {/* Pilar 1 */}
-            <div className="pilar-card reveal-up">
-              <h3>{dict.pillars.p1.num}. {dict.pillars.p1.title}</h3>
-              <p className="pilar-subtitle">Conocimiento profundo o básico</p>
-              <p>{dict.pillars.p1.desc}</p>
-              <div className="pilar-tag">Perfilamiento Dinámico</div>
-            </div>
-
-            {/* Pilar 2 */}
-            <div className="pilar-card reveal-up delay-1">
-              <h3>{dict.pillars.p2.num}. {dict.pillars.p2.title}</h3>
-              <p className="pilar-subtitle">Catálogo de opciones adecuadas</p>
-              <p>{dict.pillars.p2.desc}</p>
-              <div className="pilar-tag">Catálogo Inteligente</div>
-            </div>
-
-            {/* Pilar 3 */}
-            <div className="pilar-card reveal-up delay-2">
-              <h3>{dict.pillars.p3.num}. {dict.pillars.p3.title}</h3>
-              <p className="pilar-subtitle">Profundización de objetivos</p>
-              <p>{dict.pillars.p3.desc}</p>
-              <div className="pilar-tag">Propósito & Mindset</div>
-            </div>
-
-            {/* Pilar 4 */}
-            <div className="pilar-card reveal-up delay-3">
-              <h3>{dict.pillars.p4.num}. {dict.pillars.p4.title}</h3>
-              <p className="pilar-subtitle">Tu diario interactivo</p>
-              <p>{dict.pillars.p4.desc}</p>
-              <div className="pilar-tag">Feedback Loop Continuo</div>
-            </div>
+            {dict.pillars.items.map((item, i) => (
+              <div key={i} className={`pilar-card reveal-up${i > 0 ? ` delay-${i}` : ""}`}>
+                <h3>{item.title}</h3>
+                <p className="pilar-subtitle">{item.subtitle}</p>
+                <p>{item.body}</p>
+                <div className="pilar-tag">{item.tag}</div>
+              </div>
+            ))}
           </div>
 
         </div>
@@ -256,19 +233,19 @@ export function ShroomedLanding({ dict, lang }: Props) {
       {/* Sección Cinemática: La Bóveda de Conocimiento */}
       <section className="boveda-section" id="boveda">
         <div className="container">
-          
+
           <div className="boveda-layout">
             <div className="boveda-info">
               <span className="section-tag">{dict.vault.tag}</span>
               <h2 className="section-title text-left">{dict.vault.title}</h2>
-              <p className="boveda-description">{dict.vault.desc}</p>
+              <p className="boveda-description">{dict.vault.body}</p>
 
               <ul className="boveda-checklist">
-                {dict.vault.checklist.map((item, idx) => (
+                {dict.vault.features.map((feat, idx) => (
                   <li key={idx}>
                     <span className="check-icon">✓</span>
                     <div>
-                      <strong>{item.title}:</strong> {item.text}
+                      <strong>{feat.title}</strong> {feat.body}
                     </div>
                   </li>
                 ))}
@@ -284,7 +261,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
                     <span className="dot yellow" />
                     <span className="dot green" />
                   </div>
-                  <span className="bar-title">Asistente Shroomed — Bóveda Activa</span>
+                  <span className="bar-title">{dict.vault.barTitle}</span>
                 </div>
 
                 <div className="boveda-chat-body">
@@ -292,15 +269,15 @@ export function ShroomedLanding({ dict, lang }: Props) {
                   <div className="chat-bubble agent-bubble">
                     <div className="bubble-avatar">🍄</div>
                     <div className="bubble-content">
-                      <strong>Agente Shroomed:</strong>
-                      <p>{dict.vault.demo.agentMsg1}</p>
+                      <strong>{dict.vault.agent}</strong>
+                      <p>{dict.vault.msg1}</p>
                     </div>
                   </div>
 
                   {/* Mensaje 2 */}
                   <div className="chat-bubble user-bubble">
                     <div className="bubble-content">
-                      <p>{dict.vault.demo.userMsg}</p>
+                      <p>{dict.vault.userMsg}</p>
                     </div>
                     <div className="bubble-avatar user-av">👤</div>
                   </div>
@@ -309,14 +286,14 @@ export function ShroomedLanding({ dict, lang }: Props) {
                   <div className="chat-bubble agent-bubble">
                     <div className="bubble-avatar">🍄</div>
                     <div className="bubble-content">
-                      <strong>Agente Shroomed:</strong>
+                      <strong>{dict.vault.agent}</strong>
                       <div className="recommendation-box">
-                        <span className="rec-badge">{dict.vault.demo.recBadge}</span>
-                        <h4>{dict.vault.demo.recTitle}</h4>
-                        <p>{dict.vault.demo.recDesc}</p>
+                        <span className="rec-badge">{dict.vault.recBadge}</span>
+                        <h4>{dict.vault.recTitle}</h4>
+                        <p>{dict.vault.recBody}</p>
                         <div className="rec-tags">
-                          <span>✓ {dict.vault.demo.tag1}</span>
-                          <span>✓ {dict.vault.demo.tag2}</span>
+                          <span>{dict.vault.recTags[0]}</span>
+                          <span>{dict.vault.recTags[1]}</span>
                         </div>
                       </div>
                     </div>
@@ -325,7 +302,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
                   {/* Bitácora Activity Indicator */}
                   <div className="bitacora-status-strip">
                     <span className="pulse-dot" />
-                    <span>{dict.vault.demo.status}</span>
+                    <span>{dict.vault.logStatus}</span>
                   </div>
 
                 </div>
@@ -340,16 +317,16 @@ export function ShroomedLanding({ dict, lang }: Props) {
       {/* Sección: Ciencia, Confianza y Seguridad */}
       <section className="ciencia-section" id="ciencia">
         <div className="container text-center">
-          
+
           <span className="section-tag">{dict.science.tag}</span>
           <h2 className="section-title">{dict.science.title}</h2>
-          
+
           <div className="ciencia-cards-grid">
             {dict.science.cards.map((c, i) => (
               <div key={i} className="ciencia-card reveal-up">
                 <div className="c-card-icon">{c.icon}</div>
                 <h3>{c.title}</h3>
-                <p>{c.desc}</p>
+                <p>{c.body}</p>
               </div>
             ))}
           </div>
@@ -360,9 +337,9 @@ export function ShroomedLanding({ dict, lang }: Props) {
       {/* CTA Final Section con Formulario de Waitlist */}
       <section className="cta-final-section">
         <div className="container">
-          
+
           <div className="cta-box text-center reveal-up">
-            
+
             <div className="cta-illustration float-anim">
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
                 <circle cx="40" cy="40" r="38" fill="#EAAF3D" stroke="#2E314A" strokeWidth="4"/>
@@ -383,7 +360,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
                   type="email"
                   name="email"
                   required
-                  placeholder={dict.cta.emailPlaceholder}
+                  placeholder={dict.cta.placeholder}
                   className="custom-input"
                 />
                 <button type="submit" className="btn btn-primary">
@@ -401,15 +378,15 @@ export function ShroomedLanding({ dict, lang }: Props) {
       {/* Footer Retro */}
       <footer className="site-footer">
         <div className="container footer-container">
-          
+
           <div className="footer-left">
             <a href="#hero" className="footer-logo">SHROOMED</a>
             <p className="footer-tagline">{dict.footer.tagline}</p>
-            <span className="brandbook-label">— BRANDBOOK 2026</span>
+            <span className="brandbook-label">{dict.footer.brandbook}</span>
           </div>
 
           <div className="footer-right">
-            <p className="copyright">{dict.footer.rights}</p>
+            <p className="copyright">{dict.footer.copyright}</p>
           </div>
 
         </div>
