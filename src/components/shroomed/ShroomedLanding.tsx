@@ -45,12 +45,12 @@ export function ShroomedLanding({ dict, lang }: Props) {
   const otherLabel = lang === "es" ? dict.langSwitch.toEn : dict.langSwitch.toEs;
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-shroom-cream text-shroom-navy">
+    <div className="relative min-h-screen bg-shroom-cream text-shroom-navy">
       <FloatingStickers />
 
       {/* Header Fijo */}
       <header className="sticky top-0 z-50 border-b-[3px] border-shroom-navy bg-shroom-cream/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3.5">
           <a href="#hero" className="flex items-center gap-2 font-display text-2xl tracking-wide">
             <span className="text-3xl">🍄</span>
             <span>SHROOMED</span>
@@ -85,13 +85,13 @@ export function ShroomedLanding({ dict, lang }: Props) {
 
       {/* Hero */}
       <section id="hero" className="relative z-10 pt-12 pb-28">
-        <div className="mx-auto max-w-5xl px-5 text-center">
+        <div className="mx-auto max-w-[1350px] px-5 text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border-[3px] border-shroom-navy bg-shroom-sky px-5 py-2 font-heading text-xs font-bold uppercase tracking-wider text-shroom-navy retro-shadow-sm">
             <span className="inline-block h-2.5 w-2.5 rounded-full border border-shroom-navy bg-shroom-coral" />
             <span>{dict.hero.badge}</span>
           </div>
 
-          <h1 className="mx-auto max-w-5xl font-display text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mx-auto max-w-[1350px] font-display text-[clamp(2.4rem,5.5vw,4.4rem)] leading-[1.1]">
             <span className="block">{dict.hero.titleTop}</span>
             <span className="mt-2 block text-shroom-coral">
               {dict.hero.titleBottom}
