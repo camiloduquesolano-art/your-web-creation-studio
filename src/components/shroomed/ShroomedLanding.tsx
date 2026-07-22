@@ -45,13 +45,49 @@ export function ShroomedLanding({ dict, lang }: Props) {
   const otherLabel = lang === "es" ? dict.langSwitch.toEn : dict.langSwitch.toEs;
 
   return (
-    <div className="landing-root">
-      <FloatingStickers />
+    <>
+      {/* Floating Background Decorative Canvas/SVG Objects */}
+      <div className="cinematic-bg" id="cinematicBg">
+        <div className="floating-sticker hongo-1" style={{ top: "15%", left: "2%" }}>
+          <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
+            <path d="M32 8C18.7 8 8 18.7 8 32H56C56 18.7 45.3 8 32 8Z" fill="#F05257" stroke="#2E314A" strokeWidth="3"/>
+            <circle cx="22" cy="18" r="4" fill="#FDE9DE"/>
+            <circle cx="42" cy="20" r="3" fill="#FDE9DE"/>
+            <circle cx="32" cy="26" r="3.5" fill="#FDE9DE"/>
+            <path d="M26 32V48C26 51.3 28.7 54 32 54C35.3 54 38 51.3 38 48V32" fill="#FDE9DE" stroke="#2E314A" strokeWidth="3"/>
+            <circle cx="29" cy="39" r="1.5" fill="#2E314A"/>
+            <circle cx="35" cy="39" r="1.5" fill="#2E314A"/>
+            <path d="M29 44C30.5 45.5 33.5 45.5 35 44" stroke="#2E314A" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </div>
 
-      {/* Header Retro Sticky */}
+        <div className="floating-sticker eye-1" style={{ top: "25%", right: "2%" }}>
+          <svg width="56" height="38" viewBox="0 0 60 40" fill="none">
+            <path d="M4 20C4 20 16 6 30 6C44 6 56 20 56 20C56 20 44 34 30 34C16 34 4 20 4 20Z" fill="#94CAED" stroke="#2E314A" strokeWidth="3"/>
+            <circle cx="30" cy="20" r="9" fill="#EAAF3D" stroke="#2E314A" strokeWidth="2.5"/>
+            <circle cx="30" cy="20" r="4" fill="#2E314A"/>
+            <circle cx="32" cy="18" r="1.5" fill="#FDE9DE"/>
+            <path d="M12 9L8 4M20 5L18 0M30 4V0M40 5L42 0M48 9L52 4" stroke="#2E314A" strokeWidth="2.5" strokeLinecap="round"/>
+          </svg>
+        </div>
+
+        <div className="floating-sticker star-1" style={{ top: "55%", left: "2%" }}>
+          <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+            <path d="M20 0C20 11 29 20 40 20C29 20 20 29 20 40C20 29 11 20 0 20C11 20 20 11 20 0Z" fill="#EAAF3D" stroke="#2E314A" strokeWidth="2"/>
+          </svg>
+        </div>
+
+        <div className="floating-sticker star-2" style={{ top: "80%", right: "2%" }}>
+          <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
+            <path d="M20 0C20 11 29 20 40 20C29 20 20 29 20 40C20 29 11 20 0 20C11 20 20 11 20 0Z" fill="#CBCB51" stroke="#2E314A" strokeWidth="2"/>
+          </svg>
+        </div>
+      </div>
+
+      {/* Header Navigation */}
       <header className="site-header">
-        <div className="container header-container">
-          <a href="#hero" className="logo-brand">
+        <div className="header-container">
+          <a href="#hero" className="logo">
             <span className="logo-icon">🍄</span>
             <span className="logo-text">SHROOMED</span>
           </a>
@@ -66,25 +102,25 @@ export function ShroomedLanding({ dict, lang }: Props) {
             <Link to={otherLang === "en" ? "/en" : "/"} className="lang-switch-btn">
               {otherLabel}
             </Link>
-            <a href="#waitlist" className="btn btn-sm btn-primary">
+            <a href="#waitlist" className="btn btn-primary btn-sm">
               {dict.nav.join}
             </a>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section id="hero" className="hero-section">
-        <div className="container text-center">
+      {/* Hero Section Cinemática */}
+      <section className="hero-section" id="hero">
+        <div className="container hero-container">
           
-          <div className="badge-pill">
-            <span className="badge-dot" />
-            <span>{dict.hero.badge}</span>
+          <div className="badge-pill hero-badge">
+            <span className="badge-dot"></span>
+            <span className="badge-text">{dict.hero.badge}</span>
           </div>
 
           <h1 className="hero-title">
             <span className="title-line-1">{dict.hero.titleTop}</span>
-            <span className="title-line-2">{dict.hero.titleBottom}</span>
+            <span className="title-line-2 highlight-text">{dict.hero.titleBottom}</span>
           </h1>
 
           <p className="hero-subtitle">
@@ -92,301 +128,268 @@ export function ShroomedLanding({ dict, lang }: Props) {
             {dict.hero.subtitle}
           </p>
 
-          {/* Waitlist Form Card */}
-          <div id="waitlist" className="waitlist-card">
-            <div className="waitlist-header">
-              <span className="sparkle">✨</span>
+          {/* Waitlist Card Principal */}
+          <div className="waitlist-card" id="waitlist">
+            <div className="waitlist-card-header">
+              <span className="sparkle-icon">✨</span>
               <span>{dict.hero.waitlistHeader}</span>
             </div>
-
+            
             <form onSubmit={handleHeroSubmit} className="waitlist-form">
               <div className="form-row">
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder={dict.hero.emailPlaceholder}
-                  className="custom-input"
-                />
-                <select name="goal" required defaultValue="" className="custom-select">
-                  <option value="" disabled>
-                    {dict.hero.goalPlaceholder}
-                  </option>
+                <div className="input-wrapper">
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder={dict.hero.emailPlaceholder}
+                    className="custom-input"
+                  />
+                </div>
+                
+                <div className="select-wrapper">
+                  <select name="goal" className="custom-select" required defaultValue="">
+                    <option value="" disabled>{dict.hero.goalPlaceholder}</option>
+                    {dict.hero.goals.map((g) => (
+                      <option key={g.value} value={g.value}>
+                        {g.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <button type="submit" className="btn btn-submit">
+                  <span>{dict.hero.submit}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </form>
+
+            <div className="waitlist-social-proof">
+              <div className="avatar-group">
+                <div className="avatar" style={{ background: "#F05257" }}>🧪</div>
+                <div className="avatar" style={{ background: "#89C97F" }}>🌿</div>
+                <div className="avatar" style={{ background: "#EAAF3D" }}>🧠</div>
+                <div className="avatar" style={{ background: "#017CA2" }}>✨</div>
+              </div>
+              <span className="proof-text">
+                <strong>{count}</strong> {dict.hero.socialProof}
               </span>
             </div>
           </div>
+
         </div>
 
-        {/* Wave divider */}
-        <div className="pointer-events-none absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" className="block h-24 w-full" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 30C240 70 480 80 720 50C960 20 1200 60 1440 40V120H0V30Z" fill="#DDC0A4" />
-            <path d="M0 50C240 90 480 100 720 70C960 40 1200 80 1440 60V120H0V50Z" fill="#94CAED" />
+        {/* Onda / Ribbon inferior del Hero */}
+        <div className="wave-divider">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 30C240 70 480 80 720 50C960 20 1200 60 1440 40V120H0V30Z" fill="#DDC0A4"/>
+            <path d="M0 50C240 90 480 100 720 70C960 40 1200 80 1440 60V120H0V50Z" fill="#94CAED"/>
           </svg>
         </div>
       </section>
 
-      {/* Pillars */}
-      <section id="pilares" className="relative z-10 bg-shroom-sky py-24">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionTag>{dict.pillars.tag}</SectionTag>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl">
-              {dict.pillars.title}
-            </h2>
-            <p className="mt-6 font-body text-lg opacity-85">{dict.pillars.description}</p>
+      {/* Sección: Los 4 Pilares del Agente Shroomed */}
+      <section className="pilares-section" id="pilares">
+        <div className="container">
+          
+          <div className="section-header text-center">
+            <span className="section-tag">{dict.pillars.tag}</span>
+            <h2 className="section-title">{dict.pillars.title}</h2>
+            <p className="section-description">{dict.pillars.subtitle}</p>
           </div>
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {dict.pillars.items.map((p, i) => (
-              <div
-                key={i}
-                className="flex flex-col gap-3 rounded-2xl border-[3px] border-shroom-navy bg-shroom-cream p-6 retro-shadow transition-transform hover:-translate-y-1"
-              >
-                <h3 className="font-display text-xl leading-tight">{p.title}</h3>
-                <p className="font-heading text-sm font-semibold text-shroom-coral">
-                  {p.subtitle}
-                </p>
-                <p className="font-body text-sm leading-relaxed opacity-85">{p.body}</p>
-                <span className="mt-auto inline-block w-fit rounded-full border-2 border-shroom-navy bg-shroom-yellow px-3 py-1 font-heading text-xs font-bold uppercase">
-                  {p.tag}
-                </span>
-              </div>
-            ))}
+
+          <div className="pilares-grid">
+            {/* Pilar 1 */}
+            <div className="pilar-card">
+              <h3>{dict.pillars.p1.num}. {dict.pillars.p1.title}</h3>
+              <p className="pilar-subtitle">Conocimiento profundo o básico</p>
+              <p>{dict.pillars.p1.desc}</p>
+              <div className="pilar-tag">Perfilamiento Dinámico</div>
+            </div>
+
+            {/* Pilar 2 */}
+            <div className="pilar-card">
+              <h3>{dict.pillars.p2.num}. {dict.pillars.p2.title}</h3>
+              <p className="pilar-subtitle">Catálogo de opciones adecuadas</p>
+              <p>{dict.pillars.p2.desc}</p>
+              <div className="pilar-tag">Catálogo Inteligente</div>
+            </div>
+
+            {/* Pilar 3 */}
+            <div className="pilar-card">
+              <h3>{dict.pillars.p3.num}. {dict.pillars.p3.title}</h3>
+              <p className="pilar-subtitle">Profundización de objetivos</p>
+              <p>{dict.pillars.p3.desc}</p>
+              <div className="pilar-tag">Propósito & Mindset</div>
+            </div>
+
+            {/* Pilar 4 */}
+            <div className="pilar-card">
+              <h3>{dict.pillars.p4.num}. {dict.pillars.p4.title}</h3>
+              <p className="pilar-subtitle">Tu diario interactivo</p>
+              <p>{dict.pillars.p4.desc}</p>
+              <div className="pilar-tag">Feedback Loop Continuo</div>
+            </div>
           </div>
+
         </div>
       </section>
 
-      {/* Vault */}
-      <section id="boveda" className="relative z-10 bg-shroom-peach py-24">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-5 lg:grid-cols-2">
-          <div>
-            <SectionTag>{dict.vault.tag}</SectionTag>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl">
-              {dict.vault.title}
-            </h2>
-            <p className="mt-6 font-body text-lg leading-relaxed opacity-85">{dict.vault.body}</p>
-            <ul className="mt-6 space-y-4">
-              {dict.vault.features.map((f, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-[3px] border-shroom-navy bg-shroom-mint font-bold">
-                    ✓
-                  </span>
-                  <span className="font-body text-base">
-                    <strong>{f.title}</strong> {f.body}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* Sección Cinemática: La Bóveda de Conocimiento */}
+      <section className="boveda-section" id="boveda">
+        <div className="container">
+          
+          <div className="boveda-layout">
+            <div className="boveda-info">
+              <span className="section-tag">{dict.vault.tag}</span>
+              <h2 className="section-title text-left">{dict.vault.title}</h2>
+              <p className="boveda-description">{dict.vault.desc}</p>
 
-          {/* Vault mockup */}
-          <div className="rounded-3xl border-[3px] border-shroom-navy bg-white retro-shadow-lg">
-            <div className="flex items-center justify-between border-b-[3px] border-shroom-navy bg-shroom-cream px-4 py-3">
-              <div className="flex gap-2">
-                <span className="h-3 w-3 rounded-full border-2 border-shroom-navy bg-shroom-coral" />
-                <span className="h-3 w-3 rounded-full border-2 border-shroom-navy bg-shroom-yellow" />
-                <span className="h-3 w-3 rounded-full border-2 border-shroom-navy bg-shroom-mint" />
-              </div>
-              <span className="font-heading text-xs font-bold uppercase">{dict.vault.barTitle}</span>
-              <span className="w-8" />
+              <ul className="boveda-checklist">
+                {dict.vault.checklist.map((item, idx) => (
+                  <li key={idx}>
+                    <span className="check-icon">✓</span>
+                    <div>
+                      <strong>{item.title}:</strong> {item.text}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="space-y-4 p-5">
-              <ChatBubble side="agent" avatar="🍄">
-                <strong>{dict.vault.agent}</strong>
-                <p className="mt-1">{dict.vault.msg1}</p>
-              </ChatBubble>
-              <ChatBubble side="user" avatar="👤">
-                <p>{dict.vault.userMsg}</p>
-              </ChatBubble>
-              <ChatBubble side="agent" avatar="🍄">
-                <strong>{dict.vault.agent}</strong>
-                <div className="mt-2 rounded-2xl border-[3px] border-shroom-navy bg-shroom-yellow p-4">
-                  <span className="inline-block rounded-full border-2 border-shroom-navy bg-white px-3 py-0.5 font-heading text-[10px] font-bold uppercase">
-                    {dict.vault.recBadge}
-                  </span>
-                  <h4 className="mt-2 font-display text-base">{dict.vault.recTitle}</h4>
-                  <p className="mt-1 font-body text-sm">{dict.vault.recBody}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {dict.vault.recTags.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border-2 border-shroom-navy bg-white px-2.5 py-1 font-heading text-xs font-semibold"
-                      >
-                        {t}
-                      </span>
-                    ))}
+
+            {/* Visual Mockup Interactivo del Agente */}
+            <div className="boveda-visual">
+              <div className="boveda-card-frame">
+                <div className="boveda-header-bar">
+                  <div className="bar-dots">
+                    <span className="dot red" />
+                    <span className="dot yellow" />
+                    <span className="dot green" />
                   </div>
+                  <span className="bar-title">Asistente Shroomed — Bóveda Activa</span>
                 </div>
-              </ChatBubble>
-              <div className="flex items-center gap-2 rounded-full border-2 border-dashed border-shroom-navy/50 bg-shroom-cream px-4 py-2 font-heading text-xs font-semibold">
-                <span className="anim-pulse-dot h-2 w-2 rounded-full bg-shroom-coral" />
-                <span>{dict.vault.logStatus}</span>
+
+                <div className="boveda-chat-body">
+                  {/* Mensaje 1 */}
+                  <div className="chat-bubble agent-bubble">
+                    <div className="bubble-avatar">🍄</div>
+                    <div className="bubble-content">
+                      <strong>Agente Shroomed:</strong>
+                      <p>{dict.vault.demo.agentMsg1}</p>
+                    </div>
+                  </div>
+
+                  {/* Mensaje 2 */}
+                  <div className="chat-bubble user-bubble">
+                    <div className="bubble-content">
+                      <p>{dict.vault.demo.userMsg}</p>
+                    </div>
+                    <div className="bubble-avatar user-av">👤</div>
+                  </div>
+
+                  {/* Mensaje 3 */}
+                  <div className="chat-bubble agent-bubble">
+                    <div className="bubble-avatar">🍄</div>
+                    <div className="bubble-content">
+                      <strong>Agente Shroomed:</strong>
+                      <div className="recommendation-box">
+                        <span className="rec-badge">{dict.vault.demo.recBadge}</span>
+                        <h4>{dict.vault.demo.recTitle}</h4>
+                        <p>{dict.vault.demo.recDesc}</p>
+                        <div className="rec-tags">
+                          <span>✓ {dict.vault.demo.tag1}</span>
+                          <span>✓ {dict.vault.demo.tag2}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bitácora Activity Indicator */}
+                  <div className="bitacora-status-strip">
+                    <span className="pulse-dot" />
+                    <span>{dict.vault.demo.status}</span>
+                  </div>
+
+                </div>
               </div>
             </div>
+
           </div>
+
         </div>
       </section>
 
-      {/* Science */}
-      <section id="ciencia" className="relative z-10 bg-shroom-mint py-24">
-        <div className="mx-auto max-w-6xl px-5 text-center">
-          <SectionTag>{dict.science.tag}</SectionTag>
-          <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl">
-            {dict.science.title}
-          </h2>
-          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {/* Sección: Ciencia, Confianza y Seguridad */}
+      <section className="ciencia-section" id="ciencia">
+        <div className="container text-center">
+          
+          <span className="section-tag">{dict.science.tag}</span>
+          <h2 className="section-title">{dict.science.title}</h2>
+          
+          <div className="ciencia-cards-grid">
             {dict.science.cards.map((c, i) => (
-              <div
-                key={i}
-                className="flex flex-col gap-3 rounded-2xl border-[3px] border-shroom-navy bg-shroom-cream p-8 text-left retro-shadow"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl border-[3px] border-shroom-navy bg-shroom-yellow text-3xl">
-                  {c.icon}
-                </div>
-                <h3 className="font-display text-xl">{c.title}</h3>
-                <p className="font-body text-sm leading-relaxed opacity-85">{c.body}</p>
+              <div key={i} className="ciencia-card">
+                <div className="c-card-icon">{c.icon}</div>
+                <h3>{c.title}</h3>
+                <p>{c.desc}</p>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="relative z-10 bg-shroom-yellow py-24">
-        <div className="mx-auto max-w-3xl px-5">
-          <div className="rounded-3xl border-[3px] border-shroom-navy bg-shroom-cream p-8 text-center retro-shadow-lg sm:p-12">
-            <div className="anim-floaty mx-auto mb-4 flex h-20 w-20 items-center justify-center">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="40" cy="40" r="38" fill="#EAAF3D" stroke="#2E314A" strokeWidth="4" />
-                <path d="M40 14C23.4 14 10 26.8 10 42.5H70C70 26.8 56.6 14 40 14Z" fill="#F05257" stroke="#2E314A" strokeWidth="3" />
-                <circle cx="27" cy="27" r="4.5" fill="#FDE9DE" />
-                <circle cx="53" cy="29" r="4.5" fill="#FDE9DE" />
-                <circle cx="40" cy="35" r="4" fill="#FDE9DE" />
-                <path d="M33 42.5V60C33 63.9 36.1 67 40 67C43.9 67 47 63.9 47 60V42.5" fill="#FDE9DE" stroke="#2E314A" strokeWidth="3" />
-              </svg>
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl">{dict.cta.title}</h2>
-            <p className="mx-auto mt-4 max-w-xl font-body text-base opacity-85">
-              {dict.cta.subtitle}
-            </p>
-            <form onSubmit={handleFinalSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder={dict.cta.placeholder}
-                className="flex-1 rounded-full border-[3px] border-shroom-navy bg-white px-5 py-3 font-body text-base outline-none focus:retro-shadow-sm"
-              />
-              <button
-                type="submit"
-                className="rounded-full border-[3px] border-shroom-navy bg-shroom-coral px-6 py-3 font-heading text-base font-bold uppercase text-white retro-shadow transition-transform hover:-translate-y-1"
-              >
-                {dict.cta.submit}
-              </button>
+      {/* CTA Final Section con Formulario de Waitlist */}
+      <section className="cta-final-section">
+        <div className="container">
+          
+            <h2 className="cta-title">{dict.cta.title}</h2>
+            <p className="cta-subtitle">{dict.cta.subtitle}</p>
+
+            <form onSubmit={handleFinalSubmit} className="cta-waitlist-form">
+              <div className="cta-form-row">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder={dict.cta.emailPlaceholder}
+                  className="custom-input"
+                />
+                <button type="submit" className="btn btn-primary">
+                  {dict.cta.submit}
+                </button>
+              </div>
             </form>
-            <p className="mt-4 font-body text-xs opacity-70">{dict.cta.disclaimer}</p>
+
+            <p className="disclaimer-text">{dict.cta.disclaimer}</p>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t-[3px] border-shroom-navy bg-shroom-teal py-10 text-shroom-cream">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 md:flex-row md:items-center">
-          <div>
-            <a href="#hero" className="font-display text-2xl text-shroom-yellow">
+      {/* Footer Retro */}
+      <footer className="site-footer">
+        <div className="container footer-container">
+          <div className="footer-left">
+            <a href="#hero" className="footer-logo">
               SHROOMED
             </a>
-            <p className="mt-2 font-body text-sm opacity-90">{dict.footer.tagline}</p>
-            <span className="mt-1 inline-block font-heading text-xs font-bold uppercase text-shroom-yellow">
-              {dict.footer.brandbook}
-            </span>
+            <p className="footer-tagline">{dict.footer.tagline}</p>
+            <span className="brandbook-label">— BRANDBOOK 2026</span>
           </div>
-          <p className="font-body text-xs opacity-80">{dict.footer.copyright}</p>
+
+          <div className="footer-right">
+            <p className="copyright">{dict.footer.rights}</p>
+          </div>
         </div>
       </footer>
 
-      {/* Toast */}
-      <div
-        role="status"
-        aria-live="polite"
-        className={`pointer-events-none fixed bottom-6 left-1/2 z-50 -translate-x-1/2 transform rounded-full border-[3px] border-shroom-navy bg-shroom-mint px-5 py-3 font-heading text-sm font-bold retro-shadow transition-all duration-300 ${
-          toast ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-        }`}
-      >
-        {toast ?? ""}
-      </div>
-    </div>
-  );
-}
-
-function SectionTag({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-block rounded-full border-2 border-shroom-navy bg-shroom-cream px-3 py-1 font-heading text-xs font-bold uppercase tracking-wider">
-      {children}
-    </span>
-  );
-}
-
-function ChatBubble({
-  side,
-  avatar,
-  children,
-}: {
-  side: "agent" | "user";
-  avatar: string;
-  children: React.ReactNode;
-}) {
-  const isAgent = side === "agent";
-  return (
-    <div className={`flex items-start gap-2 ${isAgent ? "" : "flex-row-reverse"}`}>
-      <div
-        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-[3px] border-shroom-navy text-base ${
-          isAgent ? "bg-shroom-coral" : "bg-shroom-sky"
-        }`}
-      >
-        {avatar}
-      </div>
-      <div
-        className={`max-w-[85%] rounded-2xl border-[3px] border-shroom-navy p-3 font-body text-sm ${
-          isAgent ? "bg-shroom-cream" : "bg-shroom-lime"
-        }`}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function FloatingStickers() {
-  return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-85">
-      <div className="anim-floaty absolute left-[1.5%] top-[14%]">
-        <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
-          <path d="M32 8C18.7 8 8 18.7 8 32H56C56 18.7 45.3 8 32 8Z" fill="#F05257" stroke="#2E314A" strokeWidth="3" />
-          <circle cx="22" cy="18" r="4" fill="#FDE9DE" />
-          <circle cx="42" cy="20" r="3" fill="#FDE9DE" />
-          <circle cx="32" cy="26" r="3.5" fill="#FDE9DE" />
-          <path d="M26 32V48C26 51.3 28.7 54 32 54C35.3 54 38 51.3 38 48V32" fill="#FDE9DE" stroke="#2E314A" strokeWidth="3" />
-        </svg>
-      </div>
-      <div className="anim-floaty-alt absolute right-[3%] top-[22%]">
-        <svg width="56" height="38" viewBox="0 0 60 40" fill="none">
-          <path d="M4 20C4 20 16 6 30 6C44 6 56 20 56 20C56 20 44 34 30 34C16 34 4 20 4 20Z" fill="#94CAED" stroke="#2E314A" strokeWidth="3" />
-          <circle cx="30" cy="20" r="9" fill="#EAAF3D" stroke="#2E314A" strokeWidth="2.5" />
-          <circle cx="30" cy="20" r="4" fill="#2E314A" />
-          <circle cx="32" cy="18" r="1.5" fill="#FDE9DE" />
-        </svg>
-      </div>
-      <div className="anim-spin-slow absolute left-[4%] top-[60%]">
-        <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
-          <path d="M20 0C20 11 29 20 40 20C29 20 20 29 20 40C20 29 11 20 0 20C11 20 20 11 20 0Z" fill="#EAAF3D" stroke="#2E314A" strokeWidth="2" />
-        </svg>
-      </div>
-      <div className="anim-spin-slow absolute right-[4%] bottom-[10%]">
-        <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
-          <path d="M20 0C20 11 29 20 40 20C29 20 20 29 20 40C20 29 11 20 0 20C11 20 20 11 20 0Z" fill="#CBCB51" stroke="#2E314A" strokeWidth="2" />
-        </svg>
-      </div>
-    </div>
+      {/* Toast Notification */}
+      {toast && (
+        <div className="toast show">
+          <span>{toast}</span>
+        </div>
+      )}
+    </>
   );
 }
