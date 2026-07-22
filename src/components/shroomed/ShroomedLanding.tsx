@@ -116,9 +116,6 @@ export function ShroomedLanding({ dict, lang }: Props) {
           </nav>
 
           <div className="header-actions">
-            <Link to="/dashboard" className="lang-switch-btn" style={{ background: "var(--color-yellow)", color: "var(--color-navy)", fontWeight: 700, border: "2px solid var(--color-navy)" }}>
-              📊 Comando
-            </Link>
             <Link to={otherLang === "en" ? "/en" : "/"} className="lang-switch-btn">
               {otherLabel}
             </Link>
