@@ -10,8 +10,9 @@
 
 ## 🚨 Reglas de Memoria & Aprendizajes Críticos
 
-### 0. NUNCA Inventar Datos o Ejemplos Ficticios
+### 0. NUNCA Inventar Datos o Ejemplos Ficticios & SIEMPRE Fechar Todo
 - **REGLA DE ORO:** Jamás inventar feedback falso, métricas ficticias ni datos simulados. Toda la documentación, tableros y análisis deben reflejar **100% hechos reales** proporcionados por el usuario.
+- **FECHADO OBLIGATORIO:** Todas las notas, tablas, tableros Kanban, roadmaps e ingestas de feedback en Obsidian deben llevar la fecha exacta (`date: YYYY-MM-DD`, `fecha_inicio`, `fecha_recepcion`).
 
 ### 1. Única Fuente de Verdad (`src/`)
 - Toda la lógica, vistas y estilos viven exclusivamente dentro del directorio `src/`.
