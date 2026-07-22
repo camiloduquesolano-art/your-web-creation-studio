@@ -1,11 +1,8 @@
 @import "tailwindcss";
 
-@layer components {
-
 /* ==========================================================================
    SHROOMED DESIGN SYSTEM & STYLESHEET
    Inspirado en el Brandbook Shroomed (Psicodélico retro 60s/70s groovy, cálido, seguro)
-   ========================================================================== */
    ========================================================================== */
 
 :root {
@@ -1118,5 +1115,3 @@ h1, h2, h3, h4 {
   .cta-box { padding: 40px 20px; }
   .title-line-1, .title-line-2 { white-space: normal; text-align: center; }
 }
-
-} /* end @layer components */
