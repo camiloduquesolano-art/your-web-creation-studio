@@ -118,3 +118,45 @@
 .anim-floaty-alt { animation: floaty-alt 7s ease-in-out infinite; }
 .anim-spin-slow { animation: spin-slow 18s linear infinite; }
 .anim-pulse-dot { animation: pulse-dot 1.4s ease-in-out infinite; }
+
+.btn-retro-yellow {
+  border: 3px solid #2e314a;
+  border-radius: 9999px;
+  background-color: #eaaf3d;
+  color: #2e314a;
+  box-shadow: 3px 3px 0 #2e314a;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+.btn-retro-yellow:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 #2e314a;
+  background-color: #f5b942;
+}
+
+.btn-retro-coral {
+  border: 3px solid #2e314a;
+  border-radius: 9999px;
+  background-color: #f05257;
+  color: #ffffff;
+  box-shadow: 3px 3px 0 #2e314a;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+.btn-retro-coral:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 #2e314a;
+  background-color: #ff5e63;
+}
+
+.btn-retro-lang {
+  border: 3px solid #2e314a;
+  border-radius: 9999px;
+  background-color: #ddc0a4;
+  color: #2e314a;
+  box-shadow: 3px 3px 0 #2e314a;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+.btn-retro-lang:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 #2e314a;
+  background-color: #eaaf3d;
+}

@@ -69,13 +69,13 @@ export function ShroomedLanding({ dict, lang }: Props) {
           <div className="flex items-center gap-3">
             <Link
               to={otherLang === "en" ? "/en" : "/"}
-              className="rounded-full border-[3px] border-shroom-navy bg-shroom-cream px-3 py-1.5 font-heading text-xs font-bold retro-shadow-sm transition-transform hover:-translate-y-0.5"
+              className="btn-retro-lang cursor-pointer px-4 py-2 font-heading text-xs font-bold uppercase"
             >
               {otherLabel}
             </Link>
             <a
               href="#waitlist"
-              className="hidden rounded-full border-[3px] border-shroom-navy bg-shroom-yellow px-4 py-2 font-heading text-sm font-bold retro-shadow-sm transition-transform hover:-translate-y-0.5 sm:inline-block"
+              className="btn-retro-yellow hidden cursor-pointer px-5 py-2.5 font-heading text-sm font-bold uppercase sm:inline-block"
             >
               {dict.nav.join}
             </a>
@@ -138,7 +138,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
               </select>
               <button
                 type="submit"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border-[3px] border-shroom-navy bg-shroom-coral px-6 py-3.5 font-heading text-sm font-bold uppercase text-white retro-shadow-sm transition-transform hover:-translate-y-0.5 active:translate-y-0"
+                className="btn-retro-coral inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 px-6 py-3.5 font-heading text-sm font-bold uppercase text-white"
               >
                 <span>{dict.hero.submit}</span>
                 <svg
