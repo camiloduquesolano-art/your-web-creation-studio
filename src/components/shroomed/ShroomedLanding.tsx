@@ -45,133 +45,73 @@ export function ShroomedLanding({ dict, lang }: Props) {
   const otherLabel = lang === "es" ? dict.langSwitch.toEn : dict.langSwitch.toEs;
 
   return (
-    <div className="relative min-h-screen bg-shroom-cream text-shroom-navy">
+    <div className="landing-root">
       <FloatingStickers />
 
-      {/* Header Fijo */}
-      <header className="sticky top-0 z-50 border-b-[3px] border-shroom-navy bg-shroom-cream/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
-          <a href="#hero" className="flex items-center gap-2 font-display text-[1.8rem] tracking-wider">
-            <span className="text-3xl">🍄</span>
-            <span>SHROOMED</span>
+      {/* Header Retro Sticky */}
+      <header className="site-header">
+        <div className="container header-container">
+          <a href="#hero" className="logo-brand">
+            <span className="logo-icon">🍄</span>
+            <span className="logo-text">SHROOMED</span>
           </a>
-          <nav className="hidden items-center gap-8 font-heading text-[1rem] font-semibold md:flex">
-            <a href="#pilares" className="transition-colors hover:text-shroom-coral">
-              {dict.nav.assistant}
-            </a>
-            <a href="#boveda" className="transition-colors hover:text-shroom-coral">
-              {dict.nav.vault}
-            </a>
-            <a href="#ciencia" className="transition-colors hover:text-shroom-coral">
-              {dict.nav.science}
-            </a>
+
+          <nav className="nav-links">
+            <a href="#pilares">{dict.nav.assistant}</a>
+            <a href="#boveda">{dict.nav.vault}</a>
+            <a href="#ciencia">{dict.nav.science}</a>
           </nav>
-          <div className="flex items-center gap-3">
-            <Link
-              to={otherLang === "en" ? "/en" : "/"}
-              className="btn-retro-lang cursor-pointer px-4 py-2 font-heading text-xs font-bold uppercase"
-            >
+
+          <div className="header-actions">
+            <Link to={otherLang === "en" ? "/en" : "/"} className="lang-switch-btn">
               {otherLabel}
             </Link>
-            <a
-              href="#waitlist"
-              className="btn-retro-yellow hidden cursor-pointer px-5 py-2.5 font-heading text-sm font-bold uppercase sm:inline-block"
-            >
+            <a href="#waitlist" className="btn btn-sm btn-primary">
               {dict.nav.join}
             </a>
           </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section id="hero" className="relative z-10 pt-12 pb-28">
-        <div className="mx-auto max-w-[1350px] px-5 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border-[3px] border-shroom-navy bg-shroom-sky px-5 py-2 font-heading text-xs font-bold uppercase tracking-wider text-shroom-navy retro-shadow-sm">
-            <span className="inline-block h-2.5 w-2.5 rounded-full border border-shroom-navy bg-shroom-coral" />
+      {/* Hero Section */}
+      <section id="hero" className="hero-section">
+        <div className="container text-center">
+          
+          <div className="badge-pill">
+            <span className="badge-dot" />
             <span>{dict.hero.badge}</span>
           </div>
 
-          <h1 className="mx-auto max-w-[1350px] font-display text-[clamp(2.4rem,5.5vw,4.4rem)] leading-[1.1]">
-            <span className="block">{dict.hero.titleTop}</span>
-            <span className="mt-2 block text-shroom-coral">
-              {dict.hero.titleBottom}
-            </span>
+          <h1 className="hero-title">
+            <span className="title-line-1">{dict.hero.titleTop}</span>
+            <span className="title-line-2">{dict.hero.titleBottom}</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl font-body text-base leading-relaxed opacity-85 sm:text-lg">
+          <p className="hero-subtitle">
             <strong>{dict.hero.subtitleLead}</strong>
             {dict.hero.subtitle}
           </p>
 
-          {/* Waitlist card */}
-          <div
-            id="waitlist"
-            className="mx-auto mt-10 max-w-4xl rounded-3xl border-[3px] border-shroom-navy bg-white p-6 text-center retro-shadow-lg sm:p-8"
-          >
-            <div className="mb-6 flex items-center justify-center gap-2 font-heading text-xs font-bold uppercase tracking-wider text-[#196768] sm:text-sm">
-              <span className="text-base">✨</span>
+          {/* Waitlist Form Card */}
+          <div id="waitlist" className="waitlist-card">
+            <div className="waitlist-header">
+              <span className="sparkle">✨</span>
               <span>{dict.hero.waitlistHeader}</span>
             </div>
 
-            <form onSubmit={handleHeroSubmit} className="flex flex-col gap-3 md:flex-row md:items-center">
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder={dict.hero.emailPlaceholder}
-                className="flex-1 rounded-full border-[3px] border-shroom-navy bg-shroom-cream px-5 py-3.5 font-body text-sm outline-none transition-all focus:retro-shadow-sm"
-              />
-              <select
-                name="goal"
-                required
-                defaultValue=""
-                className="flex-1 rounded-full border-[3px] border-shroom-navy bg-shroom-cream px-5 py-3.5 font-body text-sm outline-none transition-all focus:retro-shadow-sm"
-              >
-                <option value="" disabled>
-                  {dict.hero.goalPlaceholder}
-                </option>
-                {dict.hero.goals.map((g) => (
-                  <option key={g.value} value={g.value}>
-                    {g.label}
+            <form onSubmit={handleHeroSubmit} className="waitlist-form">
+              <div className="form-row">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder={dict.hero.emailPlaceholder}
+                  className="custom-input"
+                />
+                <select name="goal" required defaultValue="" className="custom-select">
+                  <option value="" disabled>
+                    {dict.hero.goalPlaceholder}
                   </option>
-                ))}
-              </select>
-              <button
-                type="submit"
-                className="btn-retro-coral inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 px-6 py-3.5 font-heading text-sm font-bold uppercase text-white"
-              >
-                <span>{dict.hero.submit}</span>
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </button>
-            </form>
-
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 border-t-2 border-dashed border-shroom-navy/20 pt-5">
-              <div className="flex -space-x-2">
-                {[
-                  { bg: "bg-shroom-coral", e: "🧪" },
-                  { bg: "bg-shroom-mint", e: "🌿" },
-                  { bg: "bg-shroom-yellow", e: "🧠" },
-                  { bg: "bg-shroom-blue", e: "✨" },
-                ].map((a, i) => (
-                  <div
-                    key={i}
-                    className={`flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-shroom-navy text-xs ${a.bg}`}
-                  >
-                    {a.e}
-                  </div>
-                ))}
-              </div>
-              <span className="font-body text-sm text-shroom-navy/80">
-                <strong className="text-shroom-navy">{count.toLocaleString()}</strong> {dict.hero.social}
               </span>
             </div>
           </div>
