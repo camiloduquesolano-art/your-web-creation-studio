@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Agente de IA personalizado para explorar con conciencia. Perfil, dosis, bóveda y bitácora.",
+          "Shroomed es tu asistente personalizado de salud y sustancias. Conoce tu perfil, personaliza dosis, explora tu bóveda de conocimiento y documenta tus experiencias.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
