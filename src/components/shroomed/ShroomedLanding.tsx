@@ -90,12 +90,10 @@ export function ShroomedLanding({ dict, lang }: Props) {
             <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-shroom-yellow" />
             <span>{dict.hero.badge}</span>
           </div>
-          <h1 className="mx-auto max-w-4xl font-display text-5xl leading-[1.05] sm:text-6xl md:text-7xl lg:text-8xl">
-            <span className="block">{dict.hero.titleTop}</span>
-            <span className="mt-2 block text-shroom-coral">
-              <span className="inline-block rotate-[-2deg] rounded-2xl border-[3px] border-shroom-navy bg-shroom-yellow px-4 py-1 retro-shadow">
-                {dict.hero.titleBottom}
-              </span>
+          <h1 className="mx-auto max-w-6xl font-display text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
+            <span className="block whitespace-nowrap">{dict.hero.titleTop}</span>
+            <span className="mt-2 block whitespace-nowrap text-shroom-coral">
+              {dict.hero.titleBottom}
             </span>
           </h1>
           <p className="mx-auto mt-8 max-w-2xl font-body text-lg leading-relaxed opacity-85">
@@ -418,7 +416,7 @@ function ChatBubble({
 
 function FloatingStickers() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden opacity-60 xl:block">
       <div className="anim-floaty absolute left-[2%] top-[12%]">
         <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
           <path d="M32 8C18.7 8 8 18.7 8 32H56C56 18.7 45.3 8 32 8Z" fill="#F05257" stroke="#2E314A" strokeWidth="3" />
