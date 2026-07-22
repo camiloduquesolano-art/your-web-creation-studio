@@ -84,19 +84,21 @@ export function ShroomedLanding({ dict, lang }: Props) {
       </header>
 
       {/* Hero */}
-      <section id="hero" className="relative z-10 pt-16 pb-32">
+      <section id="hero" className="relative z-10 pt-12 pb-28">
         <div className="mx-auto max-w-5xl px-5 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border-[3px] border-shroom-navy bg-shroom-coral px-4 py-2 font-heading text-xs font-bold uppercase tracking-wider text-white retro-shadow-sm">
-            <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-shroom-yellow" />
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border-[3px] border-shroom-navy bg-shroom-sky px-5 py-2 font-heading text-xs font-bold uppercase tracking-wider text-shroom-navy retro-shadow-sm">
+            <span className="inline-block h-2.5 w-2.5 rounded-full border border-shroom-navy bg-shroom-coral" />
             <span>{dict.hero.badge}</span>
           </div>
-          <h1 className="mx-auto max-w-6xl font-display text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
-            <span className="block whitespace-nowrap">{dict.hero.titleTop}</span>
-            <span className="mt-2 block whitespace-nowrap text-shroom-coral">
+
+          <h1 className="mx-auto max-w-5xl font-display text-4xl leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl">
+            <span className="block">{dict.hero.titleTop}</span>
+            <span className="mt-2 block text-shroom-coral">
               {dict.hero.titleBottom}
             </span>
           </h1>
-          <p className="mx-auto mt-8 max-w-2xl font-body text-lg leading-relaxed opacity-85">
+
+          <p className="mx-auto mt-6 max-w-2xl font-body text-base leading-relaxed opacity-85 sm:text-lg">
             <strong>{dict.hero.subtitleLead}</strong>
             {dict.hero.subtitle}
           </p>
@@ -104,25 +106,26 @@ export function ShroomedLanding({ dict, lang }: Props) {
           {/* Waitlist card */}
           <div
             id="waitlist"
-            className="mx-auto mt-12 max-w-3xl rounded-3xl border-[3px] border-shroom-navy bg-white p-6 text-left retro-shadow-lg sm:p-8"
+            className="mx-auto mt-10 max-w-4xl rounded-3xl border-[3px] border-shroom-navy bg-white p-6 text-center retro-shadow-lg sm:p-8"
           >
-            <div className="mb-4 flex items-center gap-2 font-heading text-sm font-bold uppercase">
-              <span className="text-lg">✨</span>
+            <div className="mb-6 flex items-center justify-center gap-2 font-heading text-xs font-bold uppercase tracking-wider text-[#196768] sm:text-sm">
+              <span className="text-base">✨</span>
               <span>{dict.hero.waitlistHeader}</span>
             </div>
-            <form onSubmit={handleHeroSubmit} className="flex flex-col gap-3">
+
+            <form onSubmit={handleHeroSubmit} className="flex flex-col gap-3 md:flex-row md:items-center">
               <input
                 type="email"
                 name="email"
                 required
                 placeholder={dict.hero.emailPlaceholder}
-                className="w-full rounded-full border-[3px] border-shroom-navy bg-shroom-cream px-5 py-3 font-body text-base outline-none transition-all focus:retro-shadow-sm"
+                className="flex-1 rounded-full border-[3px] border-shroom-navy bg-shroom-cream px-5 py-3.5 font-body text-sm outline-none transition-all focus:retro-shadow-sm"
               />
               <select
                 name="goal"
                 required
                 defaultValue=""
-                className="w-full rounded-full border-[3px] border-shroom-navy bg-shroom-cream px-5 py-3 font-body text-base outline-none transition-all focus:retro-shadow-sm"
+                className="flex-1 rounded-full border-[3px] border-shroom-navy bg-shroom-cream px-5 py-3.5 font-body text-sm outline-none transition-all focus:retro-shadow-sm"
               >
                 <option value="" disabled>
                   {dict.hero.goalPlaceholder}
@@ -135,12 +138,12 @@ export function ShroomedLanding({ dict, lang }: Props) {
               </select>
               <button
                 type="submit"
-                className="mt-1 inline-flex items-center justify-center gap-2 rounded-full border-[3px] border-shroom-navy bg-shroom-coral px-6 py-3 font-heading text-base font-bold uppercase text-white retro-shadow transition-transform hover:-translate-y-1 active:translate-y-0"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border-[3px] border-shroom-navy bg-shroom-coral px-6 py-3.5 font-heading text-sm font-bold uppercase text-white retro-shadow-sm transition-transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 <span>{dict.hero.submit}</span>
                 <svg
-                  width="20"
-                  height="20"
+                  width="18"
+                  height="18"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -151,7 +154,7 @@ export function ShroomedLanding({ dict, lang }: Props) {
               </button>
             </form>
 
-            <div className="mt-5 flex flex-wrap items-center gap-3 border-t-2 border-dashed border-shroom-navy/30 pt-4">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 border-t-2 border-dashed border-shroom-navy/20 pt-5">
               <div className="flex -space-x-2">
                 {[
                   { bg: "bg-shroom-coral", e: "🧪" },
@@ -161,14 +164,14 @@ export function ShroomedLanding({ dict, lang }: Props) {
                 ].map((a, i) => (
                   <div
                     key={i}
-                    className={`flex h-9 w-9 items-center justify-center rounded-full border-[3px] border-shroom-navy text-sm ${a.bg}`}
+                    className={`flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-shroom-navy text-xs ${a.bg}`}
                   >
                     {a.e}
                   </div>
                 ))}
               </div>
-              <span className="font-body text-sm">
-                <strong>{count.toLocaleString()}</strong> {dict.hero.social}
+              <span className="font-body text-sm text-shroom-navy/80">
+                <strong className="text-shroom-navy">{count.toLocaleString()}</strong> {dict.hero.social}
               </span>
             </div>
           </div>
@@ -416,8 +419,8 @@ function ChatBubble({
 
 function FloatingStickers() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden opacity-60 xl:block">
-      <div className="anim-floaty absolute left-[2%] top-[12%]">
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden opacity-85">
+      <div className="anim-floaty absolute left-[1.5%] top-[14%]">
         <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
           <path d="M32 8C18.7 8 8 18.7 8 32H56C56 18.7 45.3 8 32 8Z" fill="#F05257" stroke="#2E314A" strokeWidth="3" />
           <circle cx="22" cy="18" r="4" fill="#FDE9DE" />
