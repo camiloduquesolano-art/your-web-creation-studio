@@ -1,24 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ShroomedLanding } from "@/components/shroomed/ShroomedLanding";
+import { dictionaries } from "@/lib/i18n/shroomed";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Shroomed — Tu Asistente Fármaco Inteligente & Bóveda de Conocimiento" },
+      {
+        name: "description",
+        content:
+          "Shroomed es tu asistente personalizado de salud y sustancias. Conoce tu perfil, personaliza dosis, explora tu bóveda de conocimiento y documenta tus experiencias.",
+      },
+      {
+        property: "og:title",
+        content: "Shroomed — Tu Asistente Fármaco Inteligente & Bóveda de Conocimiento",
+      },
+      {
+        property: "og:description",
+        content:
+          "Agente de IA personalizado para explorar con conciencia. Perfil, dosis, bóveda y bitácora.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "canonical", href: "/" },
+      { rel: "alternate", hreflang: "es", href: "/" },
+      { rel: "alternate", hreflang: "en", href: "/en" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  return <ShroomedLanding dict={dictionaries.es} lang="es" />;
 }
