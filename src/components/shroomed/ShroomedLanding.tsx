@@ -11,6 +11,23 @@ export function ShroomedLanding({ dict, lang }: Props) {
 
   useEffect(() => {
     setCount(getSubscriberCount());
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll(".reveal-up, .reveal-fade").forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   function showToast(msg: string) {

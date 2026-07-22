@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shroomed — Your Personal Guide to Explore with Awareness</title>
+  <meta name="description" content="Shroomed is your personalized health & substance AI assistant. Get to know your profile, tailor dosages, explore your knowledge vault, and track your journal.">
+  
+  <!-- Google Fonts: Bagel Fat One, Fredoka, Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Background Decorative Canvas/SVG Objects -->
+  <div class="cinematic-bg" id="cinematicBg">
+    <div class="floating-sticker hongo-1" style="top: 15%; left: 2%;">
+      <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 8C18.7 8 8 18.7 8 32H56C56 18.7 45.3 8 32 8Z" fill="#F05257" stroke="#2E314A" stroke-width="3"/>
+        <circle cx="22" cy="18" r="4" fill="#FDE9DE"/>
+        <circle cx="42" cy="20" r="3" fill="#FDE9DE"/>
+        <circle cx="32" cy="26" r="3.5" fill="#FDE9DE"/>
+        <path d="M26 32V48C26 51.3 28.7 54 32 54C35.3 54 38 51.3 38 48V32" fill="#FDE9DE" stroke="#2E314A" stroke-width="3"/>
+        <circle cx="29" cy="39" r="1.5" fill="#2E314A"/>
+        <circle cx="35" cy="39" r="1.5" fill="#2E314A"/>
+        <path d="M29 44C30.5 45.5 33.5 45.5 35 44" stroke="#2E314A" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="floating-sticker eye-1" style="top: 25%; right: 2%;">
+      <svg width="56" height="38" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 20C4 20 16 6 30 6C44 6 56 20 56 20C56 20 44 34 30 34C16 34 4 20 4 20Z" fill="#94CAED" stroke="#2E314A" stroke-width="3"/>
+        <circle cx="30" cy="20" r="9" fill="#EAAF3D" stroke="#2E314A" stroke-width="2.5"/>
+        <circle cx="30" cy="20" r="4" fill="#2E314A"/>
+        <circle cx="32" cy="18" r="1.5" fill="#FDE9DE"/>
+        <path d="M12 9L8 4M20 5L18 0M30 4V0M40 5L42 0M48 9L52 4" stroke="#2E314A" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="floating-sticker star-1" style="top: 55%; left: 2%;">
+      <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C20 11 29 20 40 20C29 20 20 29 20 40C20 29 11 20 0 20C11 20 20 11 20 0Z" fill="#EAAF3D" stroke="#2E314A" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="floating-sticker star-2" style="top: 80%; right: 2%;">
+      <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 0C20 11 29 20 40 20C29 20 20 29 20 40C20 29 11 20 0 20C11 20 20 11 20 0Z" fill="#CBCB51" stroke="#2E314A" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="logo">
+        <span class="logo-icon">🍄</span>
+        <span class="logo-text">SHROOMED</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#pilares">The Assistant</a>
+        <a href="#boveda">Knowledge Vault</a>
+        <a href="#ciencia">Science & Safety</a>
+      </nav>
+
+      <div class="header-actions" style="display: flex; gap: 12px; align-items: center;">
+        <!-- Language Switcher -->
+        <a href="index.html" class="lang-switch-btn" title="Cambiar a Español">🇪🇸 ES</a>
+        <a href="#waitlist" class="btn btn-primary btn-sm">Join Waitlist ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section Cinemática -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-container">
+      
+      <div class="badge-pill hero-badge reveal-fade">
+        <span class="badge-dot"></span>
+        <span class="badge-text">COMING SOON • PRIVATE BETA 2026</span>
+      </div>
+
+      <h1 class="hero-title reveal-up">
+        <span class="title-line-1">YOUR PERSONAL GUIDE TO</span>
+        <span class="title-line-2 highlight-text">EXPLORE WITH AWARENESS</span>
+      </h1>
+
+      <p class="hero-subtitle reveal-up delay-1">
+        <strong>Shroomed</strong> is an AI agent that gets to know you first, to then help you understand what you are looking for with clear, relatable, and tailored information. No hype, no guessing.
+      </p>
+
+      <!-- Waitlist Card Principal -->
+      <div class="waitlist-card reveal-up delay-2" id="waitlist">
+        <div class="waitlist-card-header">
+          <span class="sparkle-icon">✨</span>
+          <span>Claim your early access spot today</span>
+        </div>
+        
+        <form id="heroWaitlistForm" class="waitlist-form">
+          <div class="form-row">
+            <div class="input-wrapper">
+              <input type="email" id="userEmail" required placeholder="Enter your email address..." class="custom-input">
+            </div>
+            
+            <div class="select-wrapper">
+              <select id="userGoal" class="custom-select" required>
+                <option value="" disabled selected>What is your primary goal?</option>
+                <option value="bienestar_mental">Mental well-being & focus</option>
+                <option value="exploracion_consciente">Conscious exploration & microdosing</option>
+                <option value="gestion_salud">Health vault & usage tracking</option>
+                <option value="curiosidad_educativa">Learn & educate with science</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-submit">
+              <span>JOIN NOW</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </form>
+
+        <div class="waitlist-social-proof">
+          <div class="avatar-group">
+            <div class="avatar" style="background:#F05257">🧪</div>
+            <div class="avatar" style="background:#89C97F">🌿</div>
+            <div class="avatar" style="background:#EAAF3D">🧠</div>
+            <div class="avatar" style="background:#017CA2">✨</div>
+          </div>
+          <span class="proof-text"><strong id="subscriberCount">842</strong> explorers are already on the waitlist</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Onda / Ribbon inferior del Hero -->
+    <div class="wave-divider">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 30C240 70 480 80 720 50C960 20 1200 60 1440 40V120H0V30Z" fill="#DDC0A4"/>
+        <path d="M0 50C240 90 480 100 720 70C960 40 1200 80 1440 60V120H0V50Z" fill="#94CAED"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Sección: Los 4 Pilares del Agente Shroomed -->
+  <section class="pilares-section" id="pilares">
+    <div class="container">
+      
+      <div class="section-header text-center reveal-up">
+        <span class="section-tag">— HOW IT WORKS</span>
+        <h2 class="section-title">A STEP-BY-STEP JOURNEY WITH YOUR AGENT</h2>
+        <p class="section-description">
+          From understanding who you are to guiding your personal logbook. Shroomed combines scientific data, medical records, and adaptive AI.
+        </p>
+      </div>
+
+      <div class="pilares-grid">
+        
+        <!-- Pilar 1 -->
+        <div class="pilar-card reveal-up">
+          <h3>1. Get to Know You</h3>
+          <p class="pilar-subtitle">Deep or basic understanding</p>
+          <p>
+            The agent analyzes your profile through personality tests, key questions, or by scanning a descriptive paragraph of your current mindset and personal history.
+          </p>
+          <div class="pilar-tag">Dynamic Profiling</div>
+        </div>
+
+        <!-- Pilar 2 -->
+        <div class="pilar-card reveal-up delay-1">
+          <h3>2. Substances & Guides</h3>
+          <p class="pilar-subtitle">Curated suitable options</p>
+          <p>
+            Based on your profiling, the platform catalogs recommended substances (within permitted and basic categories) for you, along with transparent educational resources.
+          </p>
+          <div class="pilar-tag">Smart Catalog</div>
+        </div>
+
+        <!-- Pilar 3 -->
+        <div class="pilar-card reveal-up delay-2">
+          <h3>3. Intentions & Feelings</h3>
+          <p class="pilar-subtitle">Deep dive into goals</p>
+          <p>
+            Explores your true interests: what you wish to experience, how you imagine feeling, and the specific short and long-term goals you hold.
+          </p>
+          <div class="pilar-tag">Purpose & Mindset</div>
+        </div>
+
+        <!-- Pilar 4 -->
+        <div class="pilar-card reveal-up delay-3">
+          <h3>4. Logbook & Evolution</h3>
+          <p class="pilar-subtitle">Your interactive journal</p>
+          <p>
+            A personal space where you log dosage, substance, context, setting, and feelings. The agent self-educates with each entry to refine future recommendations.
+          </p>
+          <div class="pilar-tag">Continuous Feedback Loop</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Sección Cinemática: La Bóveda de Conocimiento -->
+  <section class="boveda-section" id="boveda">
+    <div class="container">
+      
+      <div class="boveda-layout">
+        
+        <div class="boveda-content reveal-up">
+          <span class="section-tag">— KNOWLEDGE VAULT</span>
+          <h2 class="boveda-title">YOUR HISTORY AND DATA, IN ONE PLACE</h2>
+          <p class="boveda-text">
+            Upload your medical history, record your habits and past experiences. Shroomed organizes your knowledge in a <strong>private vault</strong> and generates a conversational pharmaco-assistant that always knows what to suggest and how to guide your scenarios.
+          </p>
+
+          <ul class="boveda-features-list">
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Medical record integration:</strong> Build your clinical & personal knowledge base without sharing it with third parties.
+              </div>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Pre-scenario recommendations:</strong> When, how much, and in what environment to consume safely.
+              </div>
+            </li>
+            <li>
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Composition & feedback loop:</strong> Access resources breaking down how each substance is composed.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Visual Mockup Interactivo del Agente -->
+        <div class="boveda-visual reveal-up delay-1">
+          <div class="boveda-card-frame">
+            <div class="boveda-header-bar">
+              <div class="bar-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="bar-title">Shroomed Assistant — Vault Active</span>
+            </div>
+
+            <div class="boveda-chat-body">
+              
+              <!-- Mensaje 1 -->
+              <div class="chat-bubble agent-bubble">
+                <div class="bubble-avatar">🍄</div>
+                <div class="bubble-content">
+                  <strong>Shroomed Agent:</strong>
+                  <p>Hi Alex! I analyzed your medical vault and your focus goals for this week. What would you like to explore today?</p>
+                </div>
+              </div>
+
+              <!-- Mensaje 2 -->
+              <div class="chat-bubble user-bubble">
+                <div class="bubble-content">
+                  <p>I'd like to check the recommended dosage to boost creativity without affecting my sleep schedule.</p>
+                </div>
+                <div class="bubble-avatar user-av">👤</div>
+              </div>
+
+              <!-- Mensaje 3 -->
+              <div class="chat-bubble agent-bubble">
+                <div class="bubble-avatar">🍄</div>
+                <div class="bubble-content">
+                  <strong>Shroomed Agent:</strong>
+                  <div class="recommendation-box">
+                    <span class="rec-badge">Personalized Recommendation</span>
+                    <h4>Creative Protocol • Recommended Dosage</h4>
+                    <p>0.15g fasted (morning). Based on your logbook entry from June 12th.</p>
+                    <div class="rec-tags">
+                      <span>✓ Zero insomnia</span>
+                      <span>✓ High focus</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bitácora Activity Indicator -->
+              <div class="bitacora-status-strip">
+                <span class="pulse-dot"></span>
+                <span>Logbook updating with your daily sensations...</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Sección: Ciencia, Confianza y Seguridad -->
+  <section class="ciencia-section" id="ciencia">
+    <div class="container text-center">
+      
+      <span class="section-tag">— TOTAL CONTROL & PROVEN SAFETY</span>
+      <h2 class="section-title">SAFE DECISIONS, REAL OUTCOMES</h2>
+      
+      <div class="ciencia-cards-grid">
+        
+        <div class="ciencia-card reveal-up">
+          <div class="c-card-icon">🔒</div>
+          <h3>Your Vault, Your Rules</h3>
+          <p>Private encryption. Your clinical history, substance logs, and journal are never shared or sold. 100% privacy guaranteed.</p>
+        </div>
+
+        <div class="ciencia-card reveal-up delay-1">
+          <div class="c-card-icon">⚡</div>
+          <h3>Zero Blind Guesswork</h3>
+          <p>Avoid dangerous drug interactions. Get exact composition, contraindications, and ideal dosage for your body before deciding.</p>
+        </div>
+
+        <div class="ciencia-card reveal-up delay-2">
+          <div class="c-card-icon">📈</div>
+          <h3>Continuous Optimization</h3>
+          <p>Track your feelings, adjust your protocol in real-time, and maximize your well-being results without trial and error.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Final Section con Formulario de Waitlist -->
+  <section class="cta-final-section">
+    <div class="container">
+      
+      <div class="cta-box text-center reveal-up">
+        
+        <div class="cta-illustration float-anim">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="38" fill="#EAAF3D" stroke="#2E314A" stroke-width="4"/>
+            <path d="M40 14C23.4 14 10 26.8 10 42.5H70C70 26.8 56.6 14 40 14Z" fill="#F05257" stroke="#2E314A" stroke-width="3"/>
+            <circle cx="27" cy="27" r="4.5" fill="#FDE9DE"/>
+            <circle cx="53" cy="29" r="4.5" fill="#FDE9DE"/>
+            <circle cx="40" cy="35" r="4" fill="#FDE9DE"/>
+            <path d="M33 42.5V60C33 63.9 36.1 67 40 67C43.9 67 47 63.9 47 60V42.5" fill="#FDE9DE" stroke="#2E314A" stroke-width="3"/>
+          </svg>
+        </div>
+
+        <h2 class="cta-title">BE AMONG THE FIRST TO TRY IT</h2>
+        <p class="cta-subtitle">
+          Join the early explorers gaining exclusive access to the Shroomed AI assistant and your personalized knowledge vault.
+        </p>
+
+        <form id="finalWaitlistForm" class="cta-waitlist-form">
+          <div class="cta-form-row">
+            <input type="email" id="finalUserEmail" required placeholder="Enter your email address..." class="custom-input">
+            <button type="submit" class="btn btn-primary">
+              RESERVE MY SPOT! 🚀
+            </button>
+          </div>
+        </form>
+
+        <p class="disclaimer-text">
+          🔒 We will never share your email. 100% privacy respected.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer Retro -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      
+      <div class="footer-left">
+        <a href="#" class="footer-logo">SHROOMED</a>
+        <p class="footer-tagline">Personalized platform & intelligent pharmaco-assistant.</p>
+        <span class="brandbook-label">— BRANDBOOK 2026</span>
+      </div>
+
+      <div class="footer-right">
+        <button id="openAdminBtn" class="admin-link-btn">
+          🔒 View Waitlist (Admin)
+        </button>
+        <p class="copyright">© 2026 Shroomed. All rights reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Modal Admin -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>📋 Registered Waitlist (`localStorage`)</h3>
+        <button class="modal-close" id="closeAdminBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="admin-stats">
+          <span>Total Registered: <strong id="modalTotalCount">0</strong></span>
+          <button id="exportCsvBtn" class="btn btn-sm btn-secondary">
+            📥 Download CSV
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="waitlist-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Primary Goal</th>
+                <th>Registration Date</th>
+              </tr>
+            </thead>
+            <tbody id="waitlistTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast">
+    <span id="toastMessage">Thank you for joining the waitlist! 🎉</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
