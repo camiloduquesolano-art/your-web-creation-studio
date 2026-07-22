@@ -1,153 +1,85 @@
 ---
-title: "Guía de Migración & Troubleshooting: Google Antigravity a Lovable.dev"
+title: "Se ve bien en localhost pero roto en Lovable — Postmortem & Guía de Migración Antigravity a Lovable"
 date: 2026-07-21
-tags:
-  - webdev
-  - antigravity
-  - lovable
-  - react
-  - tailwindv4
-  - tanstack-start
-  - vite
-  - troubleshooting
-  - obsidian-vault
-status: completed
+tags: [dev, lovable, antigravity, css, tailwind, debugging, postmortem, obsidian-vault]
+proyecto: your-web-creation-studio (Shroomed)
+estado: resuelto
+fuente: Antigravity AI + Claude Collaboration
 ---
 
-# 🧠 Guía Definitiva de Migración: Google Antigravity ➔ Lovable.dev
-> **Proyecto:** Shroomed Landing Page & Platform  
-> **Fecha:** 21 de Julio, 2026  
-> **Arquitectura:** HTML/CSS/JS Vanilla (Antigravity Prototype) ➔ TanStack Start + React + Vite + Tailwind CSS v4 (Lovable.dev)
+# 🧠 Se ve bien en localhost pero roto en Lovable — Postmortem & Guía Definitiva
+
+> [!summary] En una frase
+> Un archivo `src/styles.css` con un `*/` duplicado (error de sintaxis en el parser `lightningcss` de Tailwind v4 que generaba **0 bytes de CSS**) y el diseño envuelto en `@layer components` hizo que la app React de Lovable cargara **sin estilos**, mientras que en local abría una versión estática distinta del sitio (`index.html` en la raíz).
 
 ---
 
-## 📌 1. Resumen Ejecutivo
+## 🔍 Qué pasó exactamente
 
-Durante el desarrollo de **Shroomed**, la versión inicial fue prototipada en **Google Antigravity** utilizando **HTML5 semántico, CSS3 puro y JavaScript moderno** en un servidor local (`http://localhost:4321`). 
+El repositorio tenía **dos versiones del mismo sitio** conviviendo:
 
-Al sincronizar la base de código con **Lovable.dev** (conectado vía GitHub), se presentó una discrepancia visual y funcional significativa. Este documento detalla la investigación, los **6 problemas técnicos clave**, sus causas raíz en la canalización de compilación (*build pipeline*) de Vite/Nitro y la solución aplicada para garantizar la paridad del 100%.
+1. **Versión estática** en la raíz: `index.html` + `style.css` + `app.js`. HTML/CSS/JS a mano, se veía perfecta. **Esto es lo que se veía en `localhost:4321`.**
+2. **Versión React** en `src/`: componente `ShroomedLanding.tsx`, servido por TanStack Start, con estilos en `src/styles.css`. **Esto es lo único que Lovable construye y publica.**
 
----
+Las dos usan las mismas clases de diseño (`.hero-section`, `.floating-sticker`, `.btn`, etc.), pero `src/styles.css` estaba roto por 4 causas principales:
 
-## 🔍 2. Desglose Técnico de Problemas y Soluciones
-
-### 🚨 Problema 1: Errores de Tipado TypeScript en el Diccionario i18n (Causa Raíz Principal de la Falla de Build)
-
-* **Síntoma:** Lovable no actualizaba el preview y parecía ignorar los nuevos commits de GitHub.
-* **Causa Raíz:** `ShroomedLanding.tsx` intentaba acceder a más de 21 propiedades inexistentes en la interfaz `Dict` de `src/lib/i18n/shroomed.ts` (por ejemplo, `dict.hero.socialProof` en lugar de `dict.hero.social`, `dict.pillars.p1` en lugar de `dict.pillars.items[0]`, `dict.vault.demo`, etc.). Esto hacía que la compilación de TypeScript (`tsc`) y el empaquetador Vite/Nitro fallaran en silencio en el entorno CI/CD de Lovable.
-* **Solución:** Se realizó una auditoría completa del árbol de tipos y se reescribió `ShroomedLanding.tsx` alineando al 100% las propiedades con la interfaz `Dict`.
-
-```typescript
-// ❌ Antes (Error de compilación)
-<span>{dict.hero.socialProof}</span>
-<h3>{dict.pillars.p1.title}</h3>
-
-// ✅ Después (Tipado estricto correcto)
-<span>{dict.hero.social}</span>
-<h3>{dict.pillars.items[0].title}</h3>
-```
+- **Bug 1 — `*/` duplicado (Error de sintaxis fatal):** El comentario de cabecera cerraba con `====== */`, pero había una **segunda línea idéntica** justo debajo. Ese `*/` suelto es CSS inválido. El parser de Tailwind v4 (`lightningcss`) fallaba con `SelectorError(EmptySelector)` en esa línea y **generaba 0 bytes de CSS**, haciendo que Lovable renderizara texto negro plano sin estilos.
+- **Bug 2 — Todo dentro de `@layer components { … }`:** El sistema de diseño completo (variables `:root`, `body`, clases) estaba envuelto en esa capa. En Tailwind v4 eso le baja la prioridad en la cascada y hace que buena parte no aplique.
+- **Bug 3 — Tipado TypeScript (`Dict` i18n):** `ShroomedLanding.tsx` intentaba acceder a 21+ propiedades inexistentes en la interfaz `Dict` de `shroomed.ts` (`socialProof`, `p1`, `p2`, `demo`, `checklist`, etc.), haciendo que el build de producción de Vite/Nitro en Lovable fallara silenciosamente.
+- **Bug 4 — `@import url()` desordenado en CSS:** Tener `@import url(...)` de Google Fonts después de `@import "tailwindcss";` causaba que Vite rechazara la hoja de estilos tras expandir Tailwind v4.
 
 ---
 
-### 🎨 Problema 2: Orden Inválido de `@import` en CSS (Descarte Completo de Estilos en Navegador)
+## 📌 Causa raíz (El patrón a recordar)
 
-* **Síntoma:** Toda la página en Lovable se renderizaba sin ningún estilo CSS (texto negro plano, sin fuentes, sin colores).
-* **Causa Raíz:** En `src/styles.css` se colocó la regla `@import url('https://fonts.googleapis.com/css2?...');` **después** de `@import "tailwindcss";`. Cuando el procesador de Tailwind v4 expandió la directiva `@import "tailwindcss"` en CSS nativo, la regla `@import url(...)` quedó en una posición interna inválida según la especificación W3C CSS, haciendo que el navegador descartara el archivo CSS completo.
-* **Solución:** Se removió la importación `@import url(...)` del archivo CSS. Las fuentes de Google Fonts se cargaron directamente en el `<head>` del documento a través de etiquetas `<link>` dentro de `src/routes/__root.tsx`.
+Cuando se parte de un diseño estático en **Antigravity** (HTML/CSS plano) y se migra a un stack de Lovable (**TanStack Start / Vite / Tailwind v4 / React**):
 
-```tsx
-// src/routes/__root.tsx
-links: [
-  { rel: "stylesheet", href: appCss },
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Fredoka:wght@500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap",
-  },
-]
-```
+- **Dejar el sitio estático viejo en la raíz** confunde en local. En Lovable el `index.html` de la raíz **no se usa**: TanStack hace SSR desde `src/routes/`, no desde un `index.html` de Vite puro.
+- **Pegar CSS plano dentro de `@layer` o meter errores de sintaxis** al copiar. `npm run dev` es permisivo y lo perdona, pero el build de producción (`lightningcss` / Nitro) de Lovable no.
 
 ---
 
-### 🧱 Problema 3: Conflicto con Resets Preflight de Tailwind v4 y Especificidad `@layer`
+## 💡 Cómo evitarlo la próxima vez (Antigravity ➔ Lovable)
 
-* **Síntoma:** Tipografías pequeñas, colores desalineados y elementos desconfigurados al cargar Tailwind v4.
-* **Causa Raíz:** 
-  1. Tailwind v4 inyecta un reset *Preflight* que sobreescribe los estilos por defecto de `h1`, `h2`, `h3`, `button`, `select`, y `input`.
-  2. Al intentar envolver el CSS nativo en `@layer components` o `@layer base`, la especificidad de Tailwind v4 degradó la prioridad de las reglas custom frente a las reglas utilitarias.
-* **Solución:** Se mantuvo el CSS nativo sin envoltorios de `@layer` directamente en `src/styles.css` inmediatamente después de `@import "tailwindcss";`. En la cascada de CSS v4, las reglas fuera de capa (*unlayered styles*) siempre ganan en especificidad sobre las reglas dentro de `@layer`.
+> [!tip] Regla de oro
+> Lo que ves en local **debe ser la misma app que Lovable construye**. Si tienes `index.html`/`app.js`/`style.css` sueltos en la raíz de un proyecto TanStack/Vite, borralos: estás mirando otra cosa.
 
----
+### 📋 Checklist antes de dar por bueno un cambio:
 
-### 👁️ Problema 4: Elementos Invisibles por Animaciones `reveal-up` (`opacity: 0`)
-
-* **Síntoma:** Bloques completos de la landing no aparecían en pantalla.
-* **Causa Raíz:** En la plantilla original HTML/CSS, la clase `.reveal-up` tenía `opacity: 0; transform: translateY(40px);` a la espera de que un script `IntersectionObserver` le agregara la clase `.active` al hacer scroll. En React, si no se ejecutaba la observación DOM en el ciclo de vida del componente, los elementos permanecían en `opacity: 0`.
-* **Solución:**
-  1. Se actualizó `src/styles.css` para que `.reveal-up` tenga visibilidad por defecto (`opacity: 1`).
-  2. Se implementó un `useEffect` con `IntersectionObserver` en React para manejar las transiciones de scroll.
-
-```tsx
-useEffect(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll(".reveal-up, .reveal-fade").forEach((el) => {
-    observer.observe(el);
-  });
-
-  return () => observer.disconnect();
-}, []);
-```
+- [x] **Corre `npm run build` en local**, no solo `npm run dev`. El build de producción atrapa errores de `lightningcss` y TypeScript que dev se traga.
+- [x] **Confirma dónde vive el sitio real:** En Lovable/TanStack es `src/routes/` + componentes en `src/components/`, **no** el `index.html` de la raíz.
+- [x] **No dejes versiones estáticas duplicadas:** Borra `index.html`, `style.css`, `app.js` sueltos de la raíz.
+- [x] **CSS de Tailwind v4 sin `@layer`:** El sistema de diseño personalizado va **sin envolver en `@layer`** directamente después de `@import "tailwindcss";`.
+- [x] **Valida el CSS con lightningcss:** `npx lightningcss src/styles.css -o /tmp/out.css` — si da 0 bytes o da error, hay un bug de sintaxis.
+- [x] **Carga fuentes en `<link>`:** Google Fonts va en `<link>` dentro de `src/routes/__root.tsx`, no en `@import url()` en CSS tras Tailwind v4.
+- [x] **Sensibilidad a mayúsculas en Linux:** `./Header` ≠ `./header`. Local (Mac/Windows) lo perdona, el CI/CD de Lovable no.
 
 ---
 
-### 📌 Problema 5: Header Sticky Inoperativo por `overflow-x: hidden`
+## 🛠️ El fix aplicado en `src/styles.css` y `src/`
 
-* **Síntoma:** El menú de navegación principal no se quedaba fijo en la parte superior al hacer scroll.
-* **Causa Raíz:** En la especificación CSS, definir `overflow-x: hidden` (o cualquier `overflow` diferente de `visible`) en un contenedor padre anula la propiedad `position: sticky` en sus elementos hijos.
-* **Solución:** Se eliminó `overflow-x: hidden` del contenedor principal (`site-wrapper` / `body`) y se ajustaron las propiedades de desbordamiento horizontal en secciones específicas cuando fue necesario.
-
----
-
-### 📂 Problema 6: Duplicación de Código (Estáticos en Raíz vs. Componentes React en `src/`)
-
-* **Síntoma:** Confusión entre los archivos servidos en `localhost:4321` y los servidos en Lovable.
-* **Causa Raíz:** La presencia de `index.html`, `index-en.html`, `style.css` y `app.js` en la raíz del repositorio competía visualmente con la arquitectura SPA/SSR de React en `src/routes/` y `src/components/`.
-* **Solución:** Se eliminaron los duplicados estáticos de la raíz. La aplicación en React en `src/` se estableció como la única fuente de verdad (*single source of truth*).
+1. **En `src/styles.css`:**
+   - Se borró la línea `====== */` duplicada.
+   - Se quitó `@layer components {` del inicio y su `}` de cierre del final.
+   - Se removió `@import url()` para fuentes (cargadas via `<link>` en `__root.tsx`).
+2. **En `src/components/shroomed/ShroomedLanding.tsx`:**
+   - Se resolvieron las 21 propiedades de i18n (`Dict`) desalineadas (`social`, `items[]`, `body`, `features[]`, `placeholder`, `copyright`).
+3. **En la raíz del proyecto:**
+   - Se borraron `index.html`, `index-en.html`, `style.css` y `app.js`.
 
 ---
 
-## 🛠️ 3. Checklist de Buenas Prácticas para Futuras Migraciones
+## 🩺 Diagnóstico rápido si vuelve a pasar
 
-Al migrar cualquier prototipo desde **Google Antigravity** hacia **Lovable.dev / Vite / TanStack Start**, seguir este procedimiento:
-
-1. [ ] **Verificar Tipado Estricto de i18n:** Ejecutar `npm run build` o `npx tsc --noEmit` localmente para confirmar que no existan errores de TypeScript en componentes React antes de hacer push.
-2. [ ] **Gestión de Fuentes Globales:** Cargar Google Fonts en el `<head>` mediante `<link>` dentro de `__root.tsx`, evitando `@import url()` dentro de hojas CSS con Tailwind v4.
-3. [ ] **Estructura de CSS en Tailwind v4:** Colocar estilos personalizados fuera de `@layer` para garantizar que sobreescriban los resets *Preflight*.
-4. [ ] **Verificar `position: sticky`:** Asegurar que ningún contenedor superior tenga `overflow: hidden` o `overflow-x: hidden`.
-5. [ ] **Ciclos de Vida en React:** Reemplazar scripts estáticos de animación (IntersectionObserver, scroll listeners) por hooks `useEffect` integrados en el ciclo de vida del componente.
-6. [ ] **Limpieza de Raíz:** Mantener el repositorio limpio, reservando `src/` para la aplicación React y evitando duplicados estáticos en el directorio raíz.
+1. ¿Se ve bien en local pero mal en Lovable? → **Casi siempre es el build de producción (`lightningcss` / TypeScript), no el código de dev.**
+2. Abre el preview de Lovable → **F12 ➔ Console** → revisa errores en rojo.
+3. Corre `npm run build` local: si falla ahí, ese es el problema real.
+4. Si el CSS "no aplica": revisa sintaxis con `lightningcss`, elimina `@layer` wrappers y confirma que estés editando el archivo que la app realmente importa (`src/styles.css`).
 
 ---
 
-## 📊 4. Estado de los Componentes Clave
+## 🔗 Links relacionados
 
-| Componente / Sección | Estado | Paleta & Estilos Aplicados |
-|---|---|---|
-| **Header Navigation** | ✅ 100% Funcional | Sticky top, logo 🍄, enlaces centrados, selector idioma EN/ES |
-| **Hero Cinemático** | ✅ 100% Funcional | Título Bagel Fat One, badge ambarino, card waitlist, wave SVG `#94CAED` |
-| **4 Pilares** | ✅ 100% Funcional | 4 tarjetas crema `#FDE9DE`, bordes 3px navy, sombras retro 6px |
-| **Bóveda de Conocimiento** | ✅ 100% Funcional | Marco navy `#2E314A`, 3 dots (rojo/amarillo/verde), chat mockup, indicador verde pulsante |
-| **Ciencia & Seguridad** | ✅ 100% Funcional | Fondo azul cielo `#94CAED`, 3 cards crema, iconos emoji a 2.8rem sin cajas de fondo |
-| **CTA Final** | ✅ 100% Funcional | Caja Teal `#196768`, título amarillo `#EAAF3D`, ilustración SVG hongo flotante |
-| **Footer** | ✅ 100% Funcional | Fondo Navy, tipografía secundaria, tag Brandbook 2026 |
-
----
-*Documento generado y archivado automáticamente para la bóveda de Obsidian.*
+- [[Tailwind v4 - notas]]
+- [[Lovable - stack y cómo despliega]]
+- [[Antigravity - flujo de trabajo]]
