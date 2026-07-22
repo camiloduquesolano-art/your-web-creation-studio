@@ -13,7 +13,7 @@
 ### 0. NUNCA Inventar Datos o Ejemplos Ficticios & SIEMPRE Fechar Todo
 - **REGLA DE ORO:** Jamás inventar feedback falso, métricas ficticias ni datos simulados. Toda la documentación, tableros y análisis deben reflejar **100% hechos reales** proporcionados por el usuario.
 - **FECHADO OBLIGATORIO:** Todas las notas, tablas, tableros Kanban, roadmaps e ingestas de feedback en Obsidian deben llevar la fecha exacta (`date: YYYY-MM-DD`, `fecha_inicio`, `fecha_recepcion`).
-- **CENTRO DE COMANDO PERSONAL (STANDALONE AUTO-SYNC):** App web independiente en `/Users/camiloduquesolano/Documents/Personal-Command-Center` (Puerto `5055`). Lee automáticamente los archivos `.md` de `/Users/camiloduquesolano/Documents/Obsidian Vault/` via `server.js` (`/api/vault-data`). El usuario NO necesita escribir en la web; toda la ingesta ocurre en Obsidian.
+- **CENTRO DE COMANDO PERSONAL (PUERTO ÚNICO 5000):** App web independiente en `/Users/camiloduquesolano/Documents/Personal-Command-Center` (Puerto `5000`). Home máster con métricas de velocidad/duración, desglose individual de experimentos y vista de aprendizajes consolidados. Lee automáticamente el Vault de Obsidian.
 
 ### 1. Única Fuente de Verdad (`src/`)
 - Toda la lógica, vistas y estilos viven exclusivamente dentro del directorio `src/`.
