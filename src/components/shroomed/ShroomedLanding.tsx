@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import type { Dict, Lang } from "@/lib/i18n/shroomed";
-import { getSubscriberCount, saveUser } from "@/lib/waitlist";
+import { getSubscriberCountFromDb, saveSignup, trackVisit } from "@/lib/waitlist";
 
 type Props = { dict: Dict; lang: Lang };
 
@@ -10,7 +10,8 @@ export function ShroomedLanding({ dict, lang }: Props) {
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
-    setCount(getSubscriberCount());
+    void trackVisit(lang, typeof window !== "undefined" ? window.location.pathname : "/");
+    void getSubscriberCountFromDb().then(setCount);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -28,34 +29,46 @@ export function ShroomedLanding({ dict, lang }: Props) {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [lang]);
 
   function showToast(msg: string) {
     setToast(msg);
     window.setTimeout(() => setToast(null), 3500);
   }
 
-  function handleHeroSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleHeroSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
     const goal = (form.elements.namedItem("goal") as HTMLSelectElement).value;
     if (!email) return;
-    saveUser(email, goal || "No especificado");
-    setCount(getSubscriberCount());
-    showToast(dict.toast.hero);
-    form.reset();
+    try {
+      await saveSignup(email, goal || "No especificado", lang);
+      const c = await getSubscriberCountFromDb();
+      setCount(c);
+      showToast(dict.toast.hero);
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      showToast(dict.toast.hero);
+    }
   }
 
-  function handleFinalSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleFinalSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
     if (!email) return;
-    saveUser(email, "Registro directo CTA final");
-    setCount(getSubscriberCount());
-    showToast(dict.toast.final);
-    form.reset();
+    try {
+      await saveSignup(email, "cta_final", lang);
+      const c = await getSubscriberCountFromDb();
+      setCount(c);
+      showToast(dict.toast.final);
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      showToast(dict.toast.final);
+    }
   }
 
   const otherLang: Lang = lang === "es" ? "en" : "es";
